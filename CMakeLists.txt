@@ -24,7 +24,7 @@ set(CMAKE_CXX_STANDARD 14)
 # Handle requirements
 ################################################################################
 
-find_package(ophidian REQUIRED CONFIG)
+find_package(ophidian 0.1.1 REQUIRED CONFIG)
 
 ################################################################################
 # Project logic 
