@@ -24,7 +24,24 @@ set(CMAKE_CXX_STANDARD 14)
 # Handle requirements
 ################################################################################
 
-find_package(ophidian 0.1.1 REQUIRED CONFIG)
+# Set Cmake module path for find_package
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+find_package(ophidian 0.1 REQUIRED CONFIG)
+
+find_package(Boost REQUIRED)
+
+find_package(Lemon REQUIRED)
+
+find_package(units 2.3.1 REQUIRED CONFIG)
+
+find_package(DEF REQUIRED)
+
+find_package(LEF REQUIRED)
+
+find_package(Flute REQUIRED)
+
+find_package(verilog-parser REQUIRED)
 
 ################################################################################
 # Project logic 
@@ -33,8 +50,13 @@ find_package(ophidian 0.1.1 REQUIRED CONFIG)
 # First add dependencies directory
 add_subdirectory(3rdparty)
 
-# Then add project source subdirectory
-add_subdirectory(src)
-
 # Then add project test subdirectory
 add_subdirectory(test)
+
+add_executable(hello_world
+    main.cpp
+)
+
+target_link_libraries(hello_world
+    PUBLIC ophidian::ophidian_design
+)
