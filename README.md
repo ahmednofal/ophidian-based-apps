@@ -1,10 +1,10 @@
-# ophidian_project_template
+# Ophidian Project Template
 This is a template for starting projects using ophidian.
 
 ## Build status
-Master [![pipeline status](https://gitlab.com/eclufsc/ophidian_project_template/badges/master/pipeline.svg)](https://gitlab.com/eclufsc/ophidian_project_template/commits/master)
+Master: [![pipeline status](https://gitlab.com/eclufsc/ophidian_project_template/badges/master/pipeline.svg)](https://gitlab.com/eclufsc/ophidian_project_template/commits/master)
 
-## Compiling
+# Compiling
 First make shure you have installed a version of the [ophidian library](https://gitlab.com/eclufsc/ophidian).
 Then run:
 ```
@@ -17,7 +17,7 @@ make
 ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
 ```
 
-## Start a new project
+# Start a new project
 Just start a new repositiory, pull the files from this repository, then push it to yours!
 ```
 git init

@@ -1,0 +1,3 @@
+[submodule "3rdparty/ophidian"]
+	path = 3rdparty/ophidian
+	url = https://gitlab.com/eclufsc/ophidian
