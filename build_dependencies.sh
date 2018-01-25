@@ -7,16 +7,14 @@ git submodule update --init --recursive
 
 # Absolute path to project root
 PROJECT_ROOT=$(pwd)
-OPHIDIAN_PATH=$PROJECT_ROOT/ophidian
+OPHIDIAN_PATH=$PROJECT_ROOT/3rdparty/ophidian
 
 cd $OPHIDIAN_PATH
 sh build_dependencies.sh
 
+cp -r $OPHIDIAN_PATH/dependencies $PROJECT_ROOT
+
 mkdir $OPHIDIAN_PATH/build && cd $OPHIDIAN_PATH/build
-cmake -DCMAKE_BUILD_TYPE=Release ..
-make
-
-mv $OPHIDIAN_PATH/dependencies $PROJECT_ROOT/dependencies
-
-cd $OPHIDIAN_PATH/build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="" ..
 make DESTDIR=$PROJECT_ROOT/dependencies install
+cd .. && rm -rf build

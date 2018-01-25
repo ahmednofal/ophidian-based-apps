@@ -24,3 +24,21 @@ with_system_dependencies:
   artifacts:
     paths:
       - build/
+
+with_local_dependencies_script:
+  image: ubuntu:artful
+  stage: build
+  before_script:
+    - apt-get update
+    - apt-get install -y curl
+    - curl -s https://packagecloud.io/install/repositories/tarberd/ophidian/script.deb.sh | bash
+    - apt-get update && apt-get install -y $DEPENDENCIES
+  script:
+    - sh build_dependencies.sh
+    - mkdir build && cd build
+    - cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    - make -j2
+    - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
+  artifacts:
+    paths:
+      - build/
