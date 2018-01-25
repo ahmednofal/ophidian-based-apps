@@ -3,6 +3,13 @@ variables:
     "build-essential 
     cmake
     ophidian"
+  SCRIPT_DEPENDENCIES: 
+    "build-essential 
+    cmake
+    libboost1.63-dev
+    libbison-dev
+    zlib1g-dev
+    flex"
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
@@ -29,10 +36,7 @@ with_local_dependencies_script:
   image: ubuntu:artful
   stage: build
   before_script:
-    - apt-get update
-    - apt-get install -y curl
-    - curl -s https://packagecloud.io/install/repositories/tarberd/ophidian/script.deb.sh | bash
-    - apt-get update && apt-get install -y $DEPENDENCIES
+    - apt-get update && apt-get install -y $SCRIPT_DEPENDENCIES
   script:
     - sh build_dependencies.sh
     - mkdir build && cd build
