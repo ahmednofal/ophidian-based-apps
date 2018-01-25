@@ -22,11 +22,13 @@ make
 ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
 ```
 
-> If you do not have permissions to install the library or you simply want to compile everything inside the repository, run:
->```
->$ sh build_dependencies.sh
->```
-> Now ophidian is installed to `"ophidian_project_templatesource_root"/dependencies`
+If you do not have permissions to install the library or you simply want to compile everything inside the repository. Make shure you have all [ophidian prerequisites](https://gitlab.com/eclufsc/ophidian/tree/build_system#prerequisites), then run:
+
+```
+$ sh build_dependencies.sh
+```
+
+Now ophidian is installed to `"ophidian_project_templatesource_root"/dependencies`
 
 # Start a new project
 Just start a new repositiory, pull the files from this repository, then push it to yours!
