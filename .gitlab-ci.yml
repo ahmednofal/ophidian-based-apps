@@ -25,7 +25,9 @@ with_system_dependencies:
     - apt-get update && apt-get install -y $DEPENDENCIES
   script:
     - mkdir build && cd build
-    - cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    - cmake -DCMAKE_INSTALL_PREFIX=/usr 
+            -DCMAKE_BUILD_TYPE=Release 
+            ..
     - make -j2
     - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
   artifacts:
@@ -40,7 +42,9 @@ with_local_dependencies_script:
   script:
     - sh build_dependencies.sh
     - mkdir build && cd build
-    - cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release ..
+    - cmake -DCMAKE_INSTALL_PREFIX=/usr 
+            -DCMAKE_BUILD_TYPE=Release 
+            ..
     - make -j2
     - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
   artifacts:
