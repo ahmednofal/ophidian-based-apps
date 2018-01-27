@@ -28,7 +28,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Set Cmake prefix path for buildind with local dependencies
-set(CMAKE_PREFIX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
 
 find_package(ophidian 0.1 REQUIRED CONFIG)
 
