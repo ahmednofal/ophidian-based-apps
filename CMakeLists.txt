@@ -36,7 +36,7 @@ find_package(Boost REQUIRED)
 
 find_package(Lemon REQUIRED)
 
-find_package(units 2.3.1 REQUIRED CONFIG)
+find_package(units REQUIRED CONFIG)
 
 find_package(DEF REQUIRED)
 

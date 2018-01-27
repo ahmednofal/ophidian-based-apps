@@ -8,8 +8,8 @@ variables:
     cmake
     libboost1.63-dev
     libbison-dev
-    zlib1g-dev
-    flex"
+    flex
+    zlib1g-dev"
   GIT_SUBMODULE_STRATEGY: recursive
 
 stages:

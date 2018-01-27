@@ -3,21 +3,64 @@
 # Ophidian library
 ################################################################################
 
+# Fetch git submodules
 git submodule update --init --recursive
 
-# Absolute path to project root
+# Get script directory
+CURRENT_DIR=$(pwd)
 SCRIPT=$(readlink -f "$0")
-PROJECT_ROOT=$(dirname "$SCRIPT")
-OPHIDIAN_PATH=$PROJECT_ROOT/3rdparty/ophidian
+SOURCE_ROOT=$(dirname "$SCRIPT")
 
-# Build Ophidian's dependencies
-sh $OPHIDIAN_PATH/build_dependencies.sh
+# Set default Dependencies Root
+DEPENDENCIES_ROOT=$SOURCE_ROOT/dependencies
 
-# Copy dependencies to source root
-cp -r $OPHIDIAN_PATH/dependencies $PROJECT_ROOT
+# Check if user wants to install elsewhere
+AUX=$2
+if [[ $1 = "--install_to" && ${AUX:0:1} != "/" ]]; then
+    DEPENDENCIES_ROOT=$CURRENT_DIR/$2
+fi
+if [[ $1 = "--install_to" && ${AUX:0:1} = "/" ]]; then
+    DEPENDENCIES_ROOT=$2
+fi
 
-# Build Ophidian and install it to dependencies path
-mkdir $OPHIDIAN_PATH/build && cd $OPHIDIAN_PATH/build
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="" ..
-make DESTDIR=$PROJECT_ROOT/dependencies install
-cd .. && rm -rf build
+# Useful variables
+DEPENDENCIES_BIN_PATH=$DEPENDENCIES_ROOT/bin
+DEPENDENCIES_LIB_PATH=$DEPENDENCIES_ROOT/lib
+DEPENDENCIES_INCLUDE_PATH=$DEPENDENCIES_ROOT/include
+DEPENDENCIES_SHARE_PATH=$DEPENDENCIES_ROOT/share
+
+# isntall dependencies directory
+echo "Install dependencies to: ${DEPENDENCIES_ROOT}"
+while true; do
+    read -p "Do you wish to continue? (y/n):  " yn
+    case $yn in
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer y (yes) or n (no).";;
+    esac
+done
+
+# This calls the build_dependencies of ophidian
+install_hook(){
+    echo "y" | sh $SOURCE_ROOT/3rdparty/ophidian/build_dependencies.sh --install_to $DEPENDENCIES_ROOT
+}
+
+install_ophidian(){
+    cd $SOURCE_ROOT/3rdparty/ophidian
+    mkdir build && cd build
+    cmake -DCMAKE_PREFIX_PATH=${DEPENDENCIES_ROOT} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="" ..
+    make DESTDIR=$SOURCE_ROOT/dependencies install
+    cd .. && rm -rf build
+}
+
+run_install(){
+    install -d $DEPENDENCIES_ROOT
+    install -d $DEPENDENCIES_BIN_PATH
+    install -d $DEPENDENCIES_LIB_PATH
+    install -d $DEPENDENCIES_INCLUDE_PATH
+
+    install_hook
+    install_ophidian
+}
+
+run_install
