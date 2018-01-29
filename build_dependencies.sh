@@ -46,7 +46,7 @@ done
 # This calls the build_dependencies of ophidian
 install_hook(){
     PARENT_SCRIPT=$SOURCE_ROOT/3rdparty/ophidian/build_dependencies.sh
-    sh ${PARENT_SCRIPT} --install_to ${DEPENDENCIES_ROOT}
+    echo "y" | sh ${PARENT_SCRIPT} --install_to ${DEPENDENCIES_ROOT}
 }
 
 install_ophidian(){
