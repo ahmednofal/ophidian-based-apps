@@ -1,10 +1,12 @@
 variables: 
   DEPENDENCIES: 
     "build-essential 
+    git
     cmake
     ophidian"
   SCRIPT_DEPENDENCIES: 
     "build-essential 
+    git
     cmake
     libboost1.63-dev
     libbison-dev
