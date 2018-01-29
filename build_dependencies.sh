@@ -19,10 +19,10 @@ DEPENDENCIES_ROOT=$SOURCE_ROOT/dependencies
 
 # Check if user wants to install elsewhere
 AUX=$2
-if [[ $1 = "--install_to" && ${AUX:0:1} != "/" ]]; then
+if [ $1 = "--install_to" && ${AUX:0:1} != "/" ]; then
     DEPENDENCIES_ROOT=$CURRENT_DIR/$2
 fi
-if [[ $1 = "--install_to" && ${AUX:0:1} = "/" ]]; then
+if [ $1 = "--install_to" && ${AUX:0:1} = "/" ]; then
     DEPENDENCIES_ROOT=$2
 fi
 
@@ -45,14 +45,15 @@ done
 
 # This calls the build_dependencies of ophidian
 install_hook(){
-    echo "y" | sh $SOURCE_ROOT/3rdparty/ophidian/build_dependencies.sh --install_to $DEPENDENCIES_ROOT
+    PARENT_SCRIPT=$SOURCE_ROOT/3rdparty/ophidian/build_dependencies.sh
+    sh ${PARENT_SCRIPT} --install_to ${DEPENDENCIES_ROOT}
 }
 
 install_ophidian(){
     cd $SOURCE_ROOT/3rdparty/ophidian
     mkdir build && cd build
     cmake -DCMAKE_PREFIX_PATH=${DEPENDENCIES_ROOT} -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="" ..
-    make DESTDIR=$SOURCE_ROOT/dependencies install
+    make DESTDIR=${DEPENDENCIES_ROOT} install
     cd .. && rm -rf build
 }
 
