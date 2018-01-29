@@ -42,7 +42,7 @@ with_local_dependencies_script:
   before_script:
     - apt-get update && apt-get install -y $SCRIPT_DEPENDENCIES
   script:
-    - echo "y" | sh build_dependencies.sh
+    - echo "y" | bash build_dependencies.sh
     - mkdir build && cd build
     - cmake -DCMAKE_INSTALL_PREFIX=/usr 
             -DCMAKE_BUILD_TYPE=Release 
