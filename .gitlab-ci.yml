@@ -17,13 +17,11 @@ variables:
 stages:
   - build
 
-with_system_dependencies:
+build_project_with_system_dependencies:
   image: ubuntu:artful
   stage: build
   before_script:
-    - apt-get update
-    - apt-get install -y curl
-    - curl -s https://packagecloud.io/install/repositories/tarberd/ophidian/script.deb.sh | bash
+    - add-apt-repository ppa:eclufsc/ophidian
     - apt-get update -qq && apt-get install -qq -y $DEPENDENCIES
   script:
     - mkdir build && cd build
@@ -36,7 +34,7 @@ with_system_dependencies:
     paths:
       - build/
 
-with_local_dependencies_script:
+build_project_with_local_dependencies_script:
   image: ubuntu:artful
   stage: build
   before_script:
