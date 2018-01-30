@@ -24,7 +24,7 @@ with_system_dependencies:
     - apt-get update
     - apt-get install -y curl
     - curl -s https://packagecloud.io/install/repositories/tarberd/ophidian/script.deb.sh | bash
-    - apt-get update && apt-get install -y $DEPENDENCIES
+    - apt-get update -qq && apt-get install -qq -y $DEPENDENCIES
   script:
     - mkdir build && cd build
     - cmake -DCMAKE_INSTALL_PREFIX=/usr 
@@ -40,7 +40,7 @@ with_local_dependencies_script:
   image: ubuntu:artful
   stage: build
   before_script:
-    - apt-get update && apt-get install -y $SCRIPT_DEPENDENCIES
+    - apt-get update -qq && apt-get install -qq -y $SCRIPT_DEPENDENCIES
   script:
     - echo "y" | bash build_dependencies.sh
     - mkdir build && cd build
