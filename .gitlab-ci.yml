@@ -1,52 +1,71 @@
 variables: 
-  DEPENDENCIES: 
-    "build-essential 
-    git
-    cmake
-    ophidian"
-  SCRIPT_DEPENDENCIES: 
-    "build-essential 
-    git
-    cmake
-    libboost1.63-dev
-    libbison-dev
-    flex
-    zlib1g-dev"
-  GIT_SUBMODULE_STRATEGY: recursive
+    DEPENDENCIES: 
+        "build-essential 
+        git
+        cmake
+        libophidian-dev"
+    BUILD_LOCAL_DEPENDENCIES:
+        "build-essential 
+        git
+        cmake 
+        libboost1.63-dev
+        libz-dev
+        flex 
+        bison
+        libbison-dev"
+    GIT_SUBMODULE_STRATEGY: recursive
 
 stages:
-  - build
+    - build
 
-build_project_with_system_dependencies:
-  image: ubuntu:artful
-  stage: build
-  before_script:
-    - add-apt-repository ppa:eclufsc/ophidian
-    - apt-get update -qq && apt-get install -qq -y $DEPENDENCIES
-  script:
-    - mkdir build && cd build
-    - cmake -DCMAKE_INSTALL_PREFIX=/usr 
-            -DCMAKE_BUILD_TYPE=Release 
-            ..
-    - make -j2
-    - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
-  artifacts:
-    paths:
-      - build/
+build_on_ubuntu-artful:
+    image: ubuntu:artful
+    stage: build
+    before_script:
+        - apt-get update -qq && apt-get install -qq -y software-properties-common
+        - add-apt-repository -y -u -m ppa:eclufsc/ophidian
+        - apt-get install -qq -y $DEPENDENCIES
+    script:
+        - mkdir build && cd build
+        - cmake -DCMAKE_INSTALL_PREFIX=/usr 
+                -DCMAKE_BUILD_TYPE=Release 
+                ..
+        - make -j2
+        - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
+    artifacts:
+        paths:
+            - build/
 
-build_project_with_local_dependencies_script:
-  image: ubuntu:artful
-  stage: build
-  before_script:
-    - apt-get update -qq && apt-get install -qq -y $SCRIPT_DEPENDENCIES
-  script:
-    - echo "y" | bash build_dependencies.sh
-    - mkdir build && cd build
-    - cmake -DCMAKE_INSTALL_PREFIX=/usr 
-            -DCMAKE_BUILD_TYPE=Release 
-            ..
-    - make -j2
-    - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
-  artifacts:
-    paths:
-      - build/
+build_using_dependencies_script_on_source:
+    image: ubuntu:artful
+    stage: build
+    before_script:
+        - apt-get update -qq && apt-get install -qq -y $BUILD_LOCAL_DEPENDENCIES
+    script:
+        - echo "y" | bash build_dependencies.sh
+        - mkdir build && cd build
+        - cmake -DCMAKE_INSTALL_PREFIX=/usr 
+                -DCMAKE_BUILD_TYPE=Release 
+                ..
+        - make -j2
+        - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
+    artifacts:
+        paths:
+            - build/
+
+build_using_dependencies_script_on_system:
+    image: ubuntu:artful
+    stage: build
+    before_script:
+        - apt-get update -qq && apt-get install -qq -y $BUILD_LOCAL_DEPENDENCIES
+    script:
+        - echo y | bash build_dependencies.sh --install_to /usr/local
+        - mkdir build && cd build
+        - cmake -DCMAKE_INSTALL_PREFIX=/usr 
+                -DCMAKE_BUILD_TYPE=Release 
+                ..
+        - make -j2
+        - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
+    artifacts:
+        paths:
+            - build/
