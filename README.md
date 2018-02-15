@@ -8,6 +8,7 @@ Master: [![pipeline status](https://gitlab.com/eclufsc/ophidian_project_template
 This will teach you how to compile an ophidian project
 
 ## Prerequisites:
+* Cmake (>= 3.5.2)
 * Ophidian
 
 Make shure you have installed a version of the [ophidian library](https://gitlab.com/eclufsc/ophidian), then run:
@@ -22,20 +23,20 @@ make
 ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
 ```
 
-If you do not have permissions to install the library or you simply want to compile everything inside the repository. Make shure you have all [ophidian prerequisites](https://gitlab.com/eclufsc/ophidian/tree/build_system#prerequisites), then run:
+> **If you do not have permissions** to install ophidian to your system or **if you want to compile ophidian** and its dependencies at source root.
+> Make shure you have all [software dependencies](https://gitlab.com/eclufsc/ophidian/tree/build_system#prerequisites), then run:
+> ```
+> $ bash build_dependencies.sh
+> ```
+> Now ophidian is installed to `"ophidian_project_templatesource_root"/dependencies`
 
-```
-$ bash build_dependencies.sh
-```
+# Starting your repository
+Either fork this repository or pull ophidian_project_template files to a new project using remote repositories as follows:
 
-Now ophidian is installed to `"ophidian_project_templatesource_root"/dependencies`
-
-# Start a new project
-Just start a new repositiory, pull the files from this repository, then push it to yours!
 ```
 git init
-git remote add ophidian_project git@gitlab.com:eclufsc/ophidian_project_template
-git pull ophidian_project master
-git remote add "your repo" "your.repo.url"
-git push "your repo" master
+git remote add ophidian_template git@gitlab.com:eclufsc/ophidian_project_template
+git pull ophidian_template master
+git remote add origin "your.repository.url"
+git push origin master
 ```

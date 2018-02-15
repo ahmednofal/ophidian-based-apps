@@ -30,14 +30,14 @@ build_on_ubuntu-artful:
         - cmake -DCMAKE_INSTALL_PREFIX=/usr 
                 -DCMAKE_BUILD_TYPE=Release 
                 ..
-        - make -j2
+        - make -j
         - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
     artifacts:
         paths:
             - build/
 
 build_on_ubuntu-bionic:
-    image: ubuntu:artful
+    image: ubuntu:bionic
     stage: build
     before_script:
         - apt-get update -qq && apt-get install -qq -y software-properties-common
@@ -48,7 +48,7 @@ build_on_ubuntu-bionic:
         - cmake -DCMAKE_INSTALL_PREFIX=/usr 
                 -DCMAKE_BUILD_TYPE=Release 
                 ..
-        - make -j2
+        - make -j
         - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
     artifacts:
         paths:
@@ -65,7 +65,7 @@ build_using_dependencies_script_on_source:
         - cmake -DCMAKE_INSTALL_PREFIX=/usr 
                 -DCMAKE_BUILD_TYPE=Release 
                 ..
-        - make -j2
+        - make -j
         - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
     artifacts:
         paths:
@@ -82,7 +82,7 @@ build_using_dependencies_script_on_system:
         - cmake -DCMAKE_INSTALL_PREFIX=/usr 
                 -DCMAKE_BUILD_TYPE=Release 
                 ..
-        - make -j2
+        - make -j
         - ./hello_world ../input_files/simple/simple.v ../input_files/simple/simple.def ../input_files/simple/simple.lef
     artifacts:
         paths:
