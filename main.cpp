@@ -57,6 +57,7 @@ int main(int argc, char** argv)
     /* Cell x; */
     //Net y;
     //cout  << "Cell x" << &x << endl;
+    //Still exploring the framework ...
     //We need to traverse the cells in the netlist
     //We need to traverse the nets in the netlist
     //We need to traverse the pins in the netlist 
