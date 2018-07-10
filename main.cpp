@@ -27,7 +27,8 @@ int main(int argc, char** argv)
     using std::cerr;
     using std::endl;
     using std::string;
-
+    using ophidian::circuit::Cell;
+    using ophidian::circuit::Net;
     string verilog;
     string def;
     string lef;
@@ -45,6 +46,38 @@ int main(int argc, char** argv)
     ophidian::design::ICCAD2015ContestDesignBuilder builder{lef, def, verilog};
 
     auto & myDesign = builder.build();
+
+    auto & the_cells = myDesign.standardCells();
+
+    auto & the_netlist = myDesign.netlist();
+
+    auto & the_placement = myDesign.placement();
+    
+    //the_placement.
+    /* Cell x; */
+    //Net y;
+    //cout  << "Cell x" << &x << endl;
+    //We need to traverse the cells in the netlist
+    //We need to traverse the nets in the netlist
+    //We need to traverse the pins in the netlist 
+    //All will be done using the same syntax below 
+    // For the cell location acquisitionwe will be using the placement entity's member function cellLocation
+    // To set the cell location we will be using the placeCell member function of the placement entity class
+    // Need to import the util::locationDbu class for locations, it has x and y class member getter functions x(),y()
+    for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++)
+    {
+
+       cout << "x placement : "<<the_placement.cellLocation(*iter).x() << "  y placement " << the_placement.cellLocation(*iter).y()<< endl;
+        /* cout << the_cells.name(acell) << endl; */
+        /* cout << typeid(acell).name() << endl; */
+    }
+
+    //for (auto iter = the_netlist.begin(x); iter !=  the_netlist.end(x); iter++ )
+    //{
+    //    
+    //    cout << "theanet reference : " << &iter << "the_netlist begin" << &the_netlist.begin(x)<<"the_netlist end" << &the_netlist.end(x)<< endl;
+    //}
+    //cout << "number is " << the_cells.size(x) << endl;
 
     return 0;
 }
