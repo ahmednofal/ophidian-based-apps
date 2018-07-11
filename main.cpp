@@ -52,6 +52,9 @@ int main(int argc, char** argv)
     auto & the_netlist = myDesign.netlist();
 
     auto & the_placement = myDesign.placement();
+
+    auto & the_floorplan = myDesign.floorplan();
+
     
     //the_placement.
     /* Cell x; */
@@ -65,13 +68,13 @@ int main(int argc, char** argv)
     // For the cell location acquisitionwe will be using the placement entity's member function cellLocation
     // To set the cell location we will be using the placeCell member function of the placement entity class
     // Need to import the util::locationDbu class for locations, it has x and y class member getter functions x(),y()
-    for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++)
-    {
+    /* for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++) */
+    /* { */
 
-       cout << "x placement : "<<the_placement.cellLocation(*iter).x() << "  y placement " << the_placement.cellLocation(*iter).y()<< endl;
-        /* cout << the_cells.name(acell) << endl; */
-        /* cout << typeid(acell).name() << endl; */
-    }
+    /*    cout << "x placement : "<<the_placement.cellLocation(*iter).x() << "  y placement " << the_placement.cellLocation(*iter).y()<< endl; */
+    /*     /1* cout << the_cells.name(acell) << endl; *1/ */
+    /*     /1* cout << typeid(acell).name() << endl; *1/ */
+    /* } */
 
     //for (auto iter = the_netlist.begin(x); iter !=  the_netlist.end(x); iter++ )
     //{
@@ -80,5 +83,9 @@ int main(int argc, char** argv)
     //}
     //cout << "number is " << the_cells.size(x) << endl;
 
+    /* for (auto iter : the_floorplan.sitesRange()) */
+    /* { */
+
+    /* } */
     return 0;
 }
