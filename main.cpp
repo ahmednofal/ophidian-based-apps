@@ -20,6 +20,8 @@
 #include <string>
 
 #include <ophidian/design/DesignBuilder.h>
+#include <ophidian/circuit/LibraryMapping.h>
+#include <ophidian/placement/Library.h>
 
 int main(int argc, char** argv)
 {
@@ -48,16 +50,15 @@ int main(int argc, char** argv)
     auto & myDesign = builder.build();
 
     auto & the_cells = myDesign.standardCells();
-
     auto & the_netlist = myDesign.netlist();
-
     auto & the_placement = myDesign.placement();
-
     auto & the_floorplan = myDesign.floorplan();
+    auto & the_library = myDesign.library();
+    auto & the_mapping = myDesign.libraryMapping();
 
     
     //the_placement.
-    /* Cell x; */
+    //Cell x; 
     //Net y;
     //cout  << "Cell x" << &x << endl;
     //Still exploring the framework ...
@@ -68,13 +69,15 @@ int main(int argc, char** argv)
     // For the cell location acquisitionwe will be using the placement entity's member function cellLocation
     // To set the cell location we will be using the placeCell member function of the placement entity class
     // Need to import the util::locationDbu class for locations, it has x and y class member getter functions x(),y()
-    /* for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++) */
-    /* { */
 
-    /*    cout << "x placement : "<<the_placement.cellLocation(*iter).x() << "  y placement " << the_placement.cellLocation(*iter).y()<< endl; */
-    /*     /1* cout << the_cells.name(acell) << endl; *1/ */
-    /*     /1* cout << typeid(acell).name() << endl; *1/ */
-    /* } */
+    for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++) {
+        auto cell = *iter;
+        auto std_cell = the_mapping.cellStdCell(cell);
+        auto dimensions = the_library.geometry(std_cell);
+        for (auto box : dimensions) {
+            cout << the_netlist.name(*iter) << " " << the_cells.name(std_cell) << " " << box.min_corner().x() << " " << box.max_corner().x() << endl;
+        }
+     } 
 
     //for (auto iter = the_netlist.begin(x); iter !=  the_netlist.end(x); iter++ )
     //{
