@@ -3,13 +3,13 @@
 
 #include <ophidian/design/Design.h>
 
-class DesignExtended : public ophidian::design::Design {
+class Placer : public ophidian::design::Design {
 
     using Cell=ophidian::circuit::Cell;
 
 public:
-    DesignExtended();
-    ~DesignExtended();
+    Placer();
+    ~Placer();
 
     int cellWidth(const Cell &);
     int cellHeight(const Cell &);
