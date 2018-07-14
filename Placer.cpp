@@ -1,26 +1,30 @@
-#include <place.h>
+#include <Placer.h>
+#include <util.h>
 
-void area(Design & design)
+float Placer::calcArea()
 {
-    auto & designStandardCells = design.standardCells();
-    auto & designNetlist = design.netlist();
-    auto & designLibraryMapping = design.libraryMapping();
-    auto & designLibrary = design.library();
+    auto & designNetlist = this->design.netlist();
+    auto & designLibraryMapping = this->design.libraryMapping();
+    auto & designLibrary = this->design.library();
 
+    float area;
     for (auto iter=designNetlist.begin(Cell()); iter != designNetlist.end(Cell()); iter++)
 
     {
-        auto currentStdCell = designLibraryMapping.cellStdCell(*iter);
-
+        auto cellWidth = cellUtil::cellWidth(*iter, designLibraryMapping, designLibrary);
+        auto cellHeight = cellUtil::cellHeight(*iter, designLibraryMapping, designLibrary);
+        area+= cellHeight * cellWidth;
     }
+
+    return area;
 }
-Design place(Design & currentDesign)
+void Placer::place(Design & currentDesign)
 {
    // We are going to be doing constructive placement
    // 1- Choose the first cell in the internal data structure format of the ophidian library
    // Bla() : Lvalue which is function definition  
    auto cell = new Cell();
-   place_1st_cell(*cell);
+   this->place1stCell(*cell );
    // 2- Use the legal function to constraint the placement range
    // 3- Place the cell randomly
    // 4- Traverse the netlist for the connected cells
@@ -31,7 +35,7 @@ Design place(Design & currentDesign)
    //
 }
 
-void place_1st_cell(Cell & cell)
+void place1stCell(Cell & cell)
 {
     
 }
