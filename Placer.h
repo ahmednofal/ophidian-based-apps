@@ -20,12 +20,12 @@ public:
     ~Placer();
     void inputDesign(Design & );
     void place(Design & );
-    void place1stCell(const Cell &);
 private:
+    float area = 0;
     int dyeWidth();
     int dyeHeight();
     float calcCoreArea();
-    float area = 0;
+    void place1stCell(const Cell &);
     Design & design;
     ophidian::circuit::Netlist & designNetlist;  
     ophidian::placement::Library & designLibrary;
