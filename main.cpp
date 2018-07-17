@@ -23,6 +23,8 @@
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/placement/Library.h>
 
+void printCellData(ophidian::standard_cell::Cell & cell, ophidian::standard_cell::StandardCells & cells);
+
 int main(int argc, char** argv)
 {
     using std::cout;
@@ -56,39 +58,26 @@ int main(int argc, char** argv)
     auto & the_library = myDesign.library();
     auto & the_mapping = myDesign.libraryMapping();
 
-    
-    //the_placement.
-    //Cell x; 
-    //Net y;
-    //cout  << "Cell x" << &x << endl;
-    //Still exploring the framework ...
-    //We need to traverse the cells in the netlist
-    //We need to traverse the nets in the netlist
-    //We need to traverse the pins in the netlist 
-    //All will be done using the same syntax below 
-    // For the cell location acquisitionwe will be using the placement entity's member function cellLocation
-    // To set the cell location we will be using the placeCell member function of the placement entity class
-    // Need to import the util::locationDbu class for locations, it has x and y class member getter functions x(),y()
-
     for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++) {
         auto cell = *iter;
         auto std_cell = the_mapping.cellStdCell(cell);
+
         auto dimensions = the_library.geometry(std_cell);
+        auto pins = the_netlist.pins(cell);
+
+        for (auto pin : pins) {
+            auto net = the_netlist.net(pin);
+            cout << "pin: " << the_netlist.name(pin) << " " << the_netlist.name(net) << endl;
+        }
+
         for (auto box : dimensions) {
-            cout << the_netlist.name(*iter) << " " << the_cells.name(std_cell) << " " << box.min_corner().x() << " " << box.max_corner().x() << endl;
+            cout << the_netlist.name(cell) << " " << the_cells.name(std_cell) << " " << box.min_corner().x() << " " << box.max_corner().x() << endl;
         }
      } 
-
-    //for (auto iter = the_netlist.begin(x); iter !=  the_netlist.end(x); iter++ )
-    //{
-    //    
-    //    cout << "theanet reference : " << &iter << "the_netlist begin" << &the_netlist.begin(x)<<"the_netlist end" << &the_netlist.end(x)<< endl;
-    //}
-    //cout << "number is " << the_cells.size(x) << endl;
-
-    /* for (auto iter : the_floorplan.sitesRange()) */
-    /* { */
-
-    /* } */
     return 0;
+}
+
+void printCellData(ophidian::standard_cell::Cell & cell, ophidian::standard_cell::StandardCells & cells)
+{
+    std::cout << cells.name(cell) << std::endl;
 }
