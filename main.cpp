@@ -25,6 +25,8 @@
 #include <ophidian/standard_cell/StandardCells.h>
 
 std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
+bool isInput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
+bool isOutput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
 
 int main(int argc, char** argv)
 {
@@ -97,18 +99,27 @@ int main(int argc, char** argv)
 
         printf("NET: %s\n", name.c_str());
 
-//        for (auto pin : the_netlist.pins(the_netlist.find(Net(), "inp1"))) {
-//            printf("%s\n", the_netlist.name(pin).c_str());
-//            auto cell = the_netlist.cell(pin);
-//        }
         for (auto pin : pins) {
-            auto cell = the_netlist.cell(pin);
             std::string pin_name = the_netlist.name(pin);
-            std::string cell_name = the_netlist.name(cell);
+            std::string cell_name;
+            
+            if (isInput(the_netlist, pin) || isOutput(the_netlist, pin)) {
+                cell_name = "n/a";
+            }
+            else {
+                auto cell = the_netlist.cell(pin);
+                cell_name = the_netlist.name(cell);
+            }
 
             printf("\tpin: %s -> cell %s\n", pin_name.c_str(), cell_name.c_str());
         }
     }
+
+//    for (auto iter = the_netlist.begin(ophidian::circuit::Input()); iter != the_netlist.end(ophidian::circuit::Input()); iter++) {
+//        auto input = *iter;
+//
+//        printf("%s\n", the_netlist.name(the_netlist.pin(input)).c_str());
+//    }
     return 0;
 }
 
@@ -137,3 +148,12 @@ std::string pinDirection(ophidian::standard_cell::StandardCells & cells, ophidia
     return direction;
 }
             
+bool isInput(ophidian::circuit::Netlist & netlist, ophidian::circuit::Pin & pin)
+{
+    return netlist.input(pin) == ophidian::circuit::Input();
+}
+
+bool isOutput(ophidian::circuit::Netlist & netlist, ophidian::circuit::Pin & pin)
+{
+    return netlist.output(pin) == ophidian::circuit::Output();
+}
