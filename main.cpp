@@ -61,6 +61,7 @@ int main(int argc, char** argv)
     auto & the_library = myDesign.library();
     auto & the_mapping = myDesign.libraryMapping();
 
+    printf("===================\nCELLS\n===================\n");
     for (auto iter=the_netlist.begin(Cell()); iter != the_netlist.end(Cell()); iter++) {
         auto cell = *iter;
         auto std_cell = the_mapping.cellStdCell(cell);
@@ -90,7 +91,7 @@ int main(int argc, char** argv)
         printf("\n");
     } 
 
-    printf("===============NETS===============\n");
+    printf("===================\nNETS\n===================\n");
     for (auto iter = the_netlist.begin(Net()); iter != the_netlist.end(Net()); iter++) {
         auto net = *iter;
         
@@ -115,7 +116,7 @@ int main(int argc, char** argv)
         }
     }
     
-    printf("===============I/O===============\nInput:-");
+    printf("===================\nI/O\n===================\nInput:-");
     for (auto iter = the_netlist.begin(ophidian::circuit::Input()); iter != the_netlist.end(ophidian::circuit::Input()); iter++) {
         auto input = *iter;
 
@@ -129,7 +130,7 @@ int main(int argc, char** argv)
         printf("\tpin: %s\n", the_netlist.name(the_netlist.pin(output)).c_str());
     }
 
-    printf("===============FLOORPLAN===============\n");
+    printf("===================\nFLOORPLAN\n===================\n");
     printf("Dye:-\n\torigin: %.3f %.3f\n", (double) the_floorplan.chipOrigin().x(), (double) the_floorplan.chipOrigin().y());
     printf("\tupper right corner: %.3f %.3f\n", (double) the_floorplan.chipUpperRightCorner().x(), (double) the_floorplan.chipUpperRightCorner().y());
     for (auto row : the_floorplan.rowsRange()) {
