@@ -23,7 +23,6 @@
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/placement/Library.h>
 
-void printCellData(ophidian::standard_cell::Cell & cell, ophidian::standard_cell::StandardCells & cells);
 
 int main(int argc, char** argv)
 {
@@ -77,7 +76,4 @@ int main(int argc, char** argv)
     return 0;
 }
 
-void printCellData(ophidian::standard_cell::Cell & cell, ophidian::standard_cell::StandardCells & cells)
-{
-    std::cout << cells.name(cell) << std::endl;
-}
+
