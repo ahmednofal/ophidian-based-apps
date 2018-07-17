@@ -1,8 +1,9 @@
 TIMELINE
 ========
-### Examples Provisions Tasks will be done 20/7
-### Document Tasks will be done by 23/7
-
+##### Constructive Placer will be done by 22/7
+##### Provisions tasks will be done hand in hand with the constructive placer, what is left after the constructive placer will take probably 2 days of writing so probably at 24/7
+##### What is left of the Document Tasks will be done by 23/7 as a lot of the document tasks will be done when implementing the constructive placer
+##### To be discussed later : DEF viewer
 
 
 
@@ -73,4 +74,4 @@ WORK DIVISION
 =============
 for both the examples provisions and documentation tasks, each of us will handle half 
 the number of the tasks
-
+We will decice on the components in the design of the placer at 4 pm (most probably) and then will be dividing the tasks ( components implementation ) equally between us (based on the number of tasks)
