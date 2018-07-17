@@ -87,6 +87,28 @@ int main(int argc, char** argv)
 
         printf("\n");
     } 
+
+    printf("===============NETS===============\n");
+    for (auto iter = the_netlist.begin(Net()); iter != the_netlist.end(Net()); iter++) {
+        auto net = *iter;
+        
+        std::string name = the_netlist.name(net);
+        auto pins = the_netlist.pins(net);
+
+        printf("NET: %s\n", name.c_str());
+
+//        for (auto pin : the_netlist.pins(the_netlist.find(Net(), "inp1"))) {
+//            printf("%s\n", the_netlist.name(pin).c_str());
+//            auto cell = the_netlist.cell(pin);
+//        }
+        for (auto pin : pins) {
+            auto cell = the_netlist.cell(pin);
+            std::string pin_name = the_netlist.name(pin);
+            std::string cell_name = the_netlist.name(cell);
+
+            printf("\tpin: %s -> cell %s\n", pin_name.c_str(), cell_name.c_str());
+        }
+    }
     return 0;
 }
 
