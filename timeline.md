@@ -45,29 +45,29 @@ Document :
 Provide Examples:
 =================
 
-- [ ] Design Cells Traversal 
-- [ ] Standard Cells Traversal
-- [ ] Pins Traversal
-- [ ] Design Cells, Pins, Nets Deletion
-- [ ] Design Cells, Pins, Nets Addition
-- [ ] Design Cells, Pins, Nets query
-- [ ] Traversing Cells' Pins
-- [ ] Pin and cell association explanation
-- [ ] Explain Direction Types
-- [ ] Cell and Std Cell association api explained
-- [ ] Pin and Std Cell association explained
-- [ ] Creation of aggregation, association and composition relations between entities and properties, and dereferencing properties via entities references as a result
-- [ ] Rows and sites traversal
-- [ ] Rows and sites addition
-- [ ] Rows and sites Removal
-- [ ] Rows and sites dereferencing using names
-- [ ] Location representation in the library explained
-- [ ] Distance calculation ifrastructure
-- [ ] Library Specific "Geometrical" Operations
-- [ ] Physical placement infrastructure using association relations
-- [ ] Utility for fixing locations 
-- [ ] Cells Placement retrieval infrastructure
-- [ ] Placement Migration infrastructure
+1. Design Cells Traversal 
+2. Standard Cells Traversal
+3. Pins Traversal
+4. Design Cells, Pins, Nets Deletion
+5. Design Cells, Pins, Nets Addition
+6. Design Cells, Pins, Nets query
+7. Traversing Cells' Pins
+8. Pin and cell association explanation
+9. Explain Direction Types
+10. Cell and Std Cell association api explained
+11. Pin and Std Cell association explained
+12. Creation of aggregation, association and composition relations between entities and properties, and dereferencing properties via entities references as a result
+13. Rows and sites traversal
+14. Rows and sites addition
+15. Rows and sites Removal
+16. Rows and sites dereferencing using names
+17. Location representation in the library explained
+18. Distance calculation ifrastructure
+19. Library Specific "Geometrical" Operations
+20. Physical placement infrastructure using association relations
+21. Utility for fixing locations 
+22. Cells Placement retrieval infrastructure
+23. Placement Migration infrastructure
 
 WORK DIVISION
 =============
