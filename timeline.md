@@ -1,7 +1,7 @@
 TIMELINE
 ========
-# Examples Provisions Tasks will be done 20/7
-# Document Tasks will be done by 23/7
+### Examples Provisions Tasks will be done 20/7
+### Document Tasks will be done by 23/7
 
 
 
