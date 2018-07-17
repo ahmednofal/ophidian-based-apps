@@ -120,6 +120,21 @@ int main(int argc, char** argv)
 //
 //        printf("%s\n", the_netlist.name(the_netlist.pin(input)).c_str());
 //    }
+    printf("===============FLOORPLAN===============\n");
+    printf("Dye:-\n\torigin: %.3f %.3f\n", (double) the_floorplan.chipOrigin().x(), (double) the_floorplan.chipOrigin().y());
+    printf("\tupper right corner: %.3f %.3f\n", (double) the_floorplan.chipUpperRightCorner().x(), (double) the_floorplan.chipUpperRightCorner().y());
+    for (auto row : the_floorplan.rowsRange()) {
+        printf("\t row has %d sites\n", (int) the_floorplan.numberOfSites(row));
+    }
+
+    printf("Sites:-\n");
+    for (auto site : the_floorplan.sitesRange()) {
+        auto position = the_floorplan.siteUpperRightCorner(site);
+        auto name = the_floorplan.name(site);
+
+        printf("\t site: %s size: %.3f %.3f\n", name.c_str(), (double) position.x(), (double) position.y());
+    }
+
     return 0;
 }
 
