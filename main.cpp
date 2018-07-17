@@ -22,7 +22,9 @@
 #include <ophidian/design/DesignBuilder.h>
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/placement/Library.h>
+#include <ophidian/standard_cell/StandardCells.h>
 
+std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
 
 int main(int argc, char** argv)
 {
@@ -63,17 +65,53 @@ int main(int argc, char** argv)
 
         auto dimensions = the_library.geometry(std_cell);
         auto pins = the_netlist.pins(cell);
+        auto std_pins = the_cells.pins(std_cell);
 
+        printf("Cell: %s Type: %s \nCell Pins:- \n", the_netlist.name(cell).c_str(), the_cells.name(std_cell).c_str());
         for (auto pin : pins) {
             auto net = the_netlist.net(pin);
-            cout << "pin: " << the_netlist.name(pin) << " " << the_netlist.name(net) << endl;
+            cout << "\tpin: " << the_netlist.name(pin) 
+                //<< " type: " << pinDirection(the_cells, pin) 
+                << " belonging to net: " << the_netlist.name(net) << endl;
         }
 
-        for (auto box : dimensions) {
-            cout << the_netlist.name(cell) << " " << the_cells.name(std_cell) << " " << box.min_corner().x() << " " << box.max_corner().x() << endl;
+        printf("Std Pins:-\n");
+        for (auto pin : std_pins) {
+            printf("\tpin: %s direction: %s\n", the_cells.name(pin).c_str(), pinDirection(the_cells, pin).c_str());
         }
-     } 
+
+        auto box = dimensions.begin(); 
+        int width = box->max_corner().x();
+        int height = box->max_corner().y(); 
+        printf("width/height %f, width/height %f\n", (double) width, (double) height);
+
+        printf("\n");
+    } 
     return 0;
 }
 
 
+std::string pinDirection(ophidian::standard_cell::StandardCells & cells, ophidian::standard_cell::Pin & pin)
+{
+    using ophidian::standard_cell::PinDirection;
+
+    std::string direction;
+
+    switch (cells.direction(pin)) {
+        case PinDirection::INPUT:
+            direction = "input";
+            break;
+        case PinDirection::OUTPUT:
+            direction = "ouput";
+            break;
+        case PinDirection::INOUT:
+            direction = "input/output";
+            break;
+        case PinDirection::NA:
+            direction = "N/A";
+            break;
+    }
+
+    return direction;
+}
+            
