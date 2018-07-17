@@ -74,12 +74,12 @@ int main(int argc, char** argv)
             auto net = the_netlist.net(pin);
             cout << "\tpin: " << the_netlist.name(pin) 
                 //<< " type: " << pinDirection(the_cells, pin) 
-                << " belonging to net: " << the_netlist.name(net) << endl;
+                << "\tbelonging to net: " << the_netlist.name(net) << endl;
         }
 
         printf("Std Pins:-\n");
         for (auto pin : std_pins) {
-            printf("\tpin: %s direction: %s\n", the_cells.name(pin).c_str(), pinDirection(the_cells, pin).c_str());
+            printf("\tpin: %s\tdirection: %s\n", the_cells.name(pin).c_str(), pinDirection(the_cells, pin).c_str());
         }
 
         auto box = dimensions.begin(); 
@@ -111,15 +111,24 @@ int main(int argc, char** argv)
                 cell_name = the_netlist.name(cell);
             }
 
-            printf("\tpin: %s -> cell %s\n", pin_name.c_str(), cell_name.c_str());
+            printf("\tpin: %10s -> cell %s\n", pin_name.c_str(), cell_name.c_str());
         }
     }
+    
+    printf("===============I/O===============\nInput:-");
+    for (auto iter = the_netlist.begin(ophidian::circuit::Input()); iter != the_netlist.end(ophidian::circuit::Input()); iter++) {
+        auto input = *iter;
 
-//    for (auto iter = the_netlist.begin(ophidian::circuit::Input()); iter != the_netlist.end(ophidian::circuit::Input()); iter++) {
-//        auto input = *iter;
-//
-//        printf("%s\n", the_netlist.name(the_netlist.pin(input)).c_str());
-//    }
+        printf("\tpin: %s\n", the_netlist.name(the_netlist.pin(input)).c_str());
+    }
+
+    printf("Output:-\n");
+    for (auto iter = the_netlist.begin(ophidian::circuit::Output()); iter != the_netlist.end(ophidian::circuit::Output()); iter++) {
+        auto output = *iter;
+
+        printf("\tpin: %s\n", the_netlist.name(the_netlist.pin(output)).c_str());
+    }
+
     printf("===============FLOORPLAN===============\n");
     printf("Dye:-\n\torigin: %.3f %.3f\n", (double) the_floorplan.chipOrigin().x(), (double) the_floorplan.chipOrigin().y());
     printf("\tupper right corner: %.3f %.3f\n", (double) the_floorplan.chipUpperRightCorner().x(), (double) the_floorplan.chipUpperRightCorner().y());
@@ -165,10 +174,22 @@ std::string pinDirection(ophidian::standard_cell::StandardCells & cells, ophidia
             
 bool isInput(ophidian::circuit::Netlist & netlist, ophidian::circuit::Pin & pin)
 {
-    return netlist.input(pin) == ophidian::circuit::Input();
+    std::string pin_name = netlist.name(pin);
+    for (auto iter = netlist.begin(ophidian::circuit::Input()); iter != netlist.end(ophidian::circuit::Input()); ++iter) {
+        auto input = *iter;
+        if (netlist.name(netlist.pin(input)) == pin_name)
+            return true;
+    }
+    return false;
 }
 
 bool isOutput(ophidian::circuit::Netlist & netlist, ophidian::circuit::Pin & pin)
 {
-    return netlist.output(pin) == ophidian::circuit::Output();
+    std::string pin_name = netlist.name(pin);
+    for (auto iter = netlist.begin(ophidian::circuit::Output()); iter != netlist.end(ophidian::circuit::Output()); ++iter) {
+        auto output = *iter;
+        if (netlist.name(netlist.pin(output)) == pin_name)
+            return true;
+    }
+    return false;
 }
