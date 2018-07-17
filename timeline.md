@@ -1,6 +1,7 @@
 TIMELINE
 ========
-
+Examples Provisions Tasks will be done 20/7
+Document Tasks will be done by 23/7
 
 
 
@@ -70,5 +71,6 @@ Provide Examples:
 
 WORK DIVISION
 =============
-
+for both the examples provisions and documentation tasks, each of us will handle half 
+the number of the tasks
 
