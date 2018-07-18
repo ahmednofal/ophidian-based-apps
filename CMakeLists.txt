@@ -55,6 +55,8 @@ add_subdirectory(3rdparty)
 
 # Then add project test subdirectory
 add_subdirectory(test)
+add_subdirectory(placer)
+add_subdirectory(util)
 
 add_executable(hello_world
     main.cpp

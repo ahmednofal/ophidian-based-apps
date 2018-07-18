@@ -13,23 +13,28 @@ using Cell=ophidian::circuit::Cell;
 
 class Placer {
 
-
 public:
     Placer(Design & );
     Placer();
     ~Placer();
     void inputDesign(Design & );
     void place(Design & );
+
 private:
     float area = 0;
+
     int dyeWidth();
     int dyeHeight();
     float calcCoreArea();
     void place1stCell(const Cell &);
+    void basicPlace();
+    int siteWidth();
+
     Design & design;
     ophidian::circuit::Netlist & designNetlist;  
     ophidian::placement::Library & designLibrary;
     ophidian::circuit::LibraryMapping & designLibraryMapping;
+    ophidian::floorplan::Floorplan & designFloorplan;
 };
 
 #endif

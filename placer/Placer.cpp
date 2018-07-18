@@ -1,8 +1,17 @@
-#include <Placer.h>
-#include <util.h>
-Placer::Placer(Design & design) : design(design), designNetlist(design.netlist()), designLibrary(design.library()), designLibraryMapping(design.libraryMapping())
+#include <placer/Placer.h>
+#include <util/util.h>
+
+
+Placer::Placer(Design & design) : 
+    design(design), 
+    designNetlist(design.netlist()), 
+    designLibrary(design.library()), 
+    designLibraryMapping(design.libraryMapping()),
+    designFloorplan(design.floorplan())
 {
 }
+
+
 float Placer::calcCoreArea()
 {
     for (auto iter=designNetlist.begin(Cell()); iter != designNetlist.end(Cell()); iter++)
@@ -13,6 +22,8 @@ float Placer::calcCoreArea()
     }
     return area;
 }
+
+
 void Placer::place(Design & currentDesign)
 {
    // We are going to be doing constructive placement
@@ -44,3 +55,16 @@ void Placer::place1stCell(const Cell & cell)
 }
 
 
+int Placer::siteWidth()
+{
+    // this assumes that there is only one site
+    auto site = (* designFloorplan.sitesRange().begin());
+    auto dimensions = designFloorplan.siteUpperRightCorner(site);
+    return (int) dimensions.x();
+}
+
+
+void Placer::basicPlace()
+{
+    int site_width = 
+}
