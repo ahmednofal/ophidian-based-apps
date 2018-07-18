@@ -8,7 +8,7 @@ Placer::Placer(Design & design) :
     designLibrary(design.library()), 
     designLibraryMapping(design.libraryMapping()),
     designFloorplan(design.floorplan()),
-    designPlacementMapping(desgin.placementMapping())
+    designPlacementMapping(design.placementMapping())
 {
 }
 
@@ -56,41 +56,62 @@ void Placer::place1stCell(const Cell & cell)
 }
 
 
-float Placer::siteWidth()
+float Placer::siteWidth(const ophidian::floorplan::Site & site)
 {
     // this assumes that there is only one site
-    auto site = (* designFloorplan.sitesRange().begin());
     auto dimensions = designFloorplan.siteUpperRightCorner(site);
     return (float) dimensions.x();
 }
 
 
-float Placer::siteHeight()
+float Placer::siteHeight(const ophidian::floorplan::Site & site)
 {
     // this assumes that there is only one site
-    auto site = (* designFloorplan.sitesRange().begin());
     auto dimensions = designFloorplan.siteUpperRightCorner(site);
     return (float) dimensions.y();
 }
 
 
-float Placer::cellWidth(Cell & cell)
+float Placer::cellWidth(const Cell & cell)
 {
    auto box = (*designPlacementMapping.geometry(cell).begin());
    return box.max_corner().x();
 }
 
+// for each row
+//      get row origin
+//      get site width
+//      place cells untill row is filled
+//      repeat untill all cell are placed
+// 
+// This assumes equal heights at all times
 void Placer::basicPlace()
 {
-    float site_width = siteWidth();
-    float site_height = siteHeight();
-    float pos_x = 0;
-    float pos_y = 0;
+    auto row_iter = designFloorplan.rowsRange().begin();
+    auto cell_iter = designNetlist.begin(Cell());
 
-    for (auto iter = designNetlist.begin(Cell()); iter != designNetlist.end(Cell()); ++iter) {
-        auto cell = *iter;
-        float cell_width = cellWidth(cell);
+    float row_x = (float) designFloorplan.origin(*row_iter).x();
+    float row_y = (float) designFloorplan.origin(*row_iter).y();
+    int sites_in_row = designFloorplan.numberOfSites(*row_iter);
+    int site_width = siteWidth(designFloorplan.site(*row_iter));
+    int filled_sites_in_row = 0;
 
+    while (cell_iter != designNetlist.end(Cell())) {
+        if (filled_sites_in_row > sites_in_row) {
+            row_iter++;
+            sites_in_row = designFloorplan.numberOfSites(*row_iter);
+            site_width = siteWidth(designFloorplan.site(*row_iter));
+            row_x = (float) designFloorplan.origin(*row_iter).x();
+            row_y = (float) designFloorplan.origin(*row_iter).y();
+        }
+
+        float cell_width = cellWidth(*cell_iter);
+        int cell_sites = cell_width / site_width;
+        float pos_x = (filled_sites_in_row + cell_sites) * site_width;
+        auto location = ophidian::util::LocationDbu(pos_x, row_y);
+        designPlacement.placeCell(*cell_iter, location);
+
+        filled_sites_in_row += cell_sites;
+        cell_iter++;
     }
 }
-

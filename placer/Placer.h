@@ -7,6 +7,7 @@
 #include <ophidian/placement/Library.h>
 #include <ophidian/util/Units.h>
 #include <ophidian/circuit/LibraryMapping.h>
+#include <ophidian/floorplan/Floorplan.h>
 
 
 class Placer {
@@ -28,9 +29,9 @@ private:
     float calcCoreArea();
     void place1stCell(const Cell &);
     void basicPlace();
-    float siteWidth();
-    float siteHeight();
-    float cellWidth(Cell &);
+    float siteWidth(const ophidian::floorplan::Site &);
+    float siteHeight(const ophidian::floorplan::Site &);
+    float cellWidth(const Cell &);
 
     Design & design;
     ophidian::circuit::Netlist & designNetlist;  
@@ -38,6 +39,7 @@ private:
     ophidian::circuit::LibraryMapping & designLibraryMapping;
     ophidian::floorplan::Floorplan & designFloorplan;
     ophidian::placement::PlacementMapping & designPlacementMapping;
+    ophidian::placement::Placement & designPlacement;
 };
 
 #endif
