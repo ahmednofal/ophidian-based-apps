@@ -55,8 +55,9 @@ add_subdirectory(3rdparty)
 
 # Then add project test subdirectory
 add_subdirectory(test)
+
+# our placer subdirectory
 add_subdirectory(placer)
-add_subdirectory(util)
 
 add_executable(hello_world
     main.cpp
@@ -64,4 +65,5 @@ add_executable(hello_world
 
 target_link_libraries(hello_world
     PUBLIC ophidian::ophidian_design
+    myPlacer
 )

@@ -1,5 +1,5 @@
-#include <placer/Placer.h>
-#include <util/util.h>
+#include "placer/Placer.h"
+#include "util/util.h"
 
 
 Placer::Placer(Design & design) : 
@@ -8,7 +8,8 @@ Placer::Placer(Design & design) :
     designLibrary(design.library()), 
     designLibraryMapping(design.libraryMapping()),
     designFloorplan(design.floorplan()),
-    designPlacementMapping(design.placementMapping())
+    designPlacementMapping(design.placementMapping()),
+    designPlacement(design.placement())
 {
 }
 
