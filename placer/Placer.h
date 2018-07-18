@@ -8,10 +8,10 @@
 #include <ophidian/util/Units.h>
 #include <ophidian/circuit/LibraryMapping.h>
 
-using Design=ophidian::design::Design;
-using Cell=ophidian::circuit::Cell;
 
 class Placer {
+using Design=ophidian::design::Design;
+using Cell=ophidian::circuit::Cell;
 
 public:
     Placer(Design & );
@@ -28,13 +28,16 @@ private:
     float calcCoreArea();
     void place1stCell(const Cell &);
     void basicPlace();
-    int siteWidth();
+    float siteWidth();
+    float siteHeight();
+    float cellWidth(Cell &);
 
     Design & design;
     ophidian::circuit::Netlist & designNetlist;  
     ophidian::placement::Library & designLibrary;
     ophidian::circuit::LibraryMapping & designLibraryMapping;
     ophidian::floorplan::Floorplan & designFloorplan;
+    ophidian::placement::PlacementMapping & designPlacementMapping;
 };
 
 #endif

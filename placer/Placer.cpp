@@ -7,7 +7,8 @@ Placer::Placer(Design & design) :
     designNetlist(design.netlist()), 
     designLibrary(design.library()), 
     designLibraryMapping(design.libraryMapping()),
-    designFloorplan(design.floorplan())
+    designFloorplan(design.floorplan()),
+    designPlacementMapping(desgin.placementMapping())
 {
 }
 
@@ -55,16 +56,41 @@ void Placer::place1stCell(const Cell & cell)
 }
 
 
-int Placer::siteWidth()
+float Placer::siteWidth()
 {
     // this assumes that there is only one site
     auto site = (* designFloorplan.sitesRange().begin());
     auto dimensions = designFloorplan.siteUpperRightCorner(site);
-    return (int) dimensions.x();
+    return (float) dimensions.x();
 }
 
+
+float Placer::siteHeight()
+{
+    // this assumes that there is only one site
+    auto site = (* designFloorplan.sitesRange().begin());
+    auto dimensions = designFloorplan.siteUpperRightCorner(site);
+    return (float) dimensions.y();
+}
+
+
+float Placer::cellWidth(Cell & cell)
+{
+   auto box = (*designPlacementMapping.geometry(cell).begin());
+   return box.max_corner().x();
+}
 
 void Placer::basicPlace()
 {
-    int site_width = 
+    float site_width = siteWidth();
+    float site_height = siteHeight();
+    float pos_x = 0;
+    float pos_y = 0;
+
+    for (auto iter = designNetlist.begin(Cell()); iter != designNetlist.end(Cell()); ++iter) {
+        auto cell = *iter;
+        float cell_width = cellWidth(cell);
+
+    }
 }
+
