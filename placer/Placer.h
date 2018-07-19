@@ -20,6 +20,8 @@ public:
     ~Placer();
     void inputDesign(Design & );
     void place(Design & );
+    void printLocations();
+    void basicPlace();
 
 private:
     float area = 0;
@@ -28,10 +30,8 @@ private:
     int dyeHeight();
     float calcCoreArea();
     void place1stCell(const Cell &);
-    void basicPlace();
     float siteWidth(const ophidian::floorplan::Site &);
     float siteHeight(const ophidian::floorplan::Site &);
-    float cellWidth(const Cell &);
 
     Design & design;
     ophidian::circuit::Netlist & designNetlist;  

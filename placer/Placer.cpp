@@ -1,5 +1,6 @@
 #include "placer/Placer.h"
 #include "util/util.h"
+#include <math.h>
 
 
 Placer::Placer(Design & design) : 
@@ -13,6 +14,9 @@ Placer::Placer(Design & design) :
 {
 }
 
+Placer::~Placer()
+{
+}
 
 float Placer::calcCoreArea()
 {
@@ -73,12 +77,6 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 }
 
 
-float Placer::cellWidth(const Cell & cell)
-{
-   auto box = (*designPlacementMapping.geometry(cell).begin());
-   return box.max_corner().x();
-}
-
 // for each row
 //      get row origin
 //      get site width
@@ -95,24 +93,45 @@ void Placer::basicPlace()
     float row_y = (float) designFloorplan.origin(*row_iter).y();
     int sites_in_row = designFloorplan.numberOfSites(*row_iter);
     int site_width = siteWidth(designFloorplan.site(*row_iter));
+    int site_height = siteHeight(designFloorplan.site(*row_iter));
     int filled_sites_in_row = 0;
 
+    printf("site width: %d site height: %d\n", site_width, site_height);
+
     while (cell_iter != designNetlist.end(Cell())) {
-        if (filled_sites_in_row > sites_in_row) {
+        float cell_width = (float) cellUtil::cellWidth(*cell_iter, designLibraryMapping, designLibrary);
+        float cell_height = (float) cellUtil::cellHeight(*cell_iter, designLibraryMapping, designLibrary);
+        int cell_sites = ceil(cell_width / (float) site_width);
+
+        if ((cell_sites + filled_sites_in_row) > sites_in_row) {
             row_iter++;
             sites_in_row = designFloorplan.numberOfSites(*row_iter);
             site_width = siteWidth(designFloorplan.site(*row_iter));
             row_x = (float) designFloorplan.origin(*row_iter).x();
             row_y = (float) designFloorplan.origin(*row_iter).y();
+            filled_sites_in_row = 0;
         }
 
-        float cell_width = cellWidth(*cell_iter);
-        int cell_sites = cell_width / site_width;
-        float pos_x = (filled_sites_in_row + cell_sites) * site_width;
+        float pos_x = (filled_sites_in_row) * site_width + row_x;
         auto location = ophidian::util::LocationDbu(pos_x, row_y);
         designPlacement.placeCell(*cell_iter, location);
 
+        // printf("cell_width: %.2f cell_height: %.2f\t cell_sites: %d\t filled_sites_in_row: %d\n", cell_width, cell_height, cell_sites, filled_sites_in_row);
         filled_sites_in_row += cell_sites;
         cell_iter++;
     }
+}
+
+
+void Placer::printLocations()
+{
+    printf("==================================\nLOCATIONS\n==================================\n");
+    for (auto cell_iter = designNetlist.begin(Cell()); cell_iter != designNetlist.end(Cell()); cell_iter++)
+    {
+        std::string name = designNetlist.name(*cell_iter);
+        float x = (float) designPlacement.cellLocation(*cell_iter).x();
+        float y = (float) designPlacement.cellLocation(*cell_iter).y();
+        printf("Cell: %s\t (%.3f, %.3f)\n", name.c_str(), x, y);
+    }
+    printf("==================================\n");
 }
