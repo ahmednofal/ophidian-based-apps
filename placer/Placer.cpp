@@ -111,7 +111,7 @@ void Placer::basicPlace()
     }
 }
 
-void Placer::goToNextRow(entity_system::EntitySystem <Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
+void Placer::goToNextRow(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
 {
             rowIter++;
             rowX = (float) mDesignFloorplan.origin(*rowIter).x();

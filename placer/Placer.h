@@ -7,7 +7,7 @@
 #include <ophidian/circuit/Netlist.h>
 #include <ophidian/placement/Library.h>
 #include <ophidian/util/Units.h>
-#include <ophidian/util/Ranges.h>
+#include <ophidian/util/Range.h>
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/floorplan/Floorplan.h>
 #include <ophidian/entity_system/EntitySystem.h>
@@ -37,7 +37,7 @@ private:
     ophidian::placement::Placement & mDesignPlacement;
 //entity_system::EntitySystem <Row>::const_iterator;
 
-    void goToNextRow(entity_system::EntitySystem <Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow);
+    void goToNextRow(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow);
     int dyeWidth();
     int dyeHeight();
     float calcCoreArea();
