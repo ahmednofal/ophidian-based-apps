@@ -3,6 +3,7 @@
 
 #include <ophidian/design/Design.h>
 #include <ophidian/placement/Placement.h>
+#include <ophidian/placement/PlacementMapping.h>
 #include <ophidian/circuit/Netlist.h>
 #include <ophidian/placement/Library.h>
 #include <ophidian/util/Units.h>
