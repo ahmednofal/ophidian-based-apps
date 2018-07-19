@@ -4,13 +4,13 @@
 
 
 Placer::Placer(Design & design) : 
-    design(design), 
-    designNetlist(design.netlist()), 
-    designLibrary(design.library()), 
-    designLibraryMapping(design.libraryMapping()),
-    designFloorplan(design.floorplan()),
-    designPlacementMapping(design.placementMapping()),
-    designPlacement(design.placement())
+    mDesign(design), 
+    mDesignNetlist(design.netlist()), 
+    mDesignLibrary(design.library()), 
+    mDesignLibraryMapping(design.libraryMapping()),
+    mDesignFloorplan(design.floorplan()),
+    mDesignPlacementMapping(design.placementMapping()),
+    mDesignPlacement(design.placement())
 {
 }
 
@@ -20,43 +20,43 @@ Placer::~Placer()
 
 float Placer::calcCoreArea()
 {
-    for (auto iter=designNetlist.begin(Cell()); iter != designNetlist.end(Cell()); iter++)
+    for (auto iter=mDesignNetlist.begin(Cell()); iter != mDesignNetlist.end(Cell()); iter++)
     {
-        auto cellWidth = cellUtil::cellWidth(*iter, designLibraryMapping, designLibrary);
-        auto cellHeight = cellUtil::cellHeight(*iter, designLibraryMapping, designLibrary);
-        this->area+= cellHeight * cellWidth;
+        auto cellWidth = cellUtil::cellWidth(*iter, mDesignLibraryMapping, mDesignLibrary);
+        auto cellHeight = cellUtil::cellHeight(*iter, mDesignLibraryMapping, mDesignLibrary);
+        mArea+= cellHeight * cellWidth;
     }
-    return area;
+    return mArea;
 }
 
 
-void Placer::place(Design & currentDesign)
-{
-   // We are going to be doing constructive placement
-   // 1- Choose the first cell in the internal data structure format of the ophidian library
-   // Bla() : Lvalue which is function definition  
+/* void Placer::place(Design & currentDesign) */
+/* { */
+/*    // We are going to be doing constructive placement */
+/*    // 1- Choose the first cell in the internal data structure format of the ophidian library */
+/*    // Bla() : Lvalue which is function definition */  
 
-   auto fstCell = this->design.netlist().begin(Cell()); 
-   this->place1stCell(*fstCell);
-   auto x = fstCell+1;
-   for (auto iter = fstCell+1; iter != this->designNetlist.end(Cell()); iter++)
-   {
+/*    auto fstCell = design.netlist().begin(Cell()); */ 
+/*    place1stCell(*fstCell); */
+/*    auto x = fstCell+1; */
+/*    for (auto iter = fstCell+1; iter != designNetlist.end(Cell()); iter++) */
+/*    { */
         
-   }
-   // 2- Use the legal function to constraint the placement range
-   // 3- Place the cell randomly
-   // 4- Traverse the netlist for the connected cells
-   // 5- place the cells one by one closer to their connected cell, closer: shorter wire length using the manhattan distance
-   //
-   //
-   // 6- Till u reach the last cell of the netlist
-   //
-}
+/*    } */
+/*    // 2- Use the legal function to constraint the placement range */
+/*    // 3- Place the cell randomly */
+/*    // 4- Traverse the netlist for the connected cells */
+/*    // 5- place the cells one by one closer to their connected cell, closer: shorter wire length using the manhattan distance */
+/*    // */
+/*    // */
+/*    // 6- Till u reach the last cell of the netlist */
+/*    // */
+/* } */
 
 void Placer::place1stCell(const Cell & cell)
 {
     auto location = ophidian::util::LocationDbu(0,0);
-    this->design.placement().placeCell(cell, location);
+    mDesign.placement().placeCell(cell, location);
 
 }
 
@@ -64,7 +64,7 @@ void Placer::place1stCell(const Cell & cell)
 float Placer::siteWidth(const ophidian::floorplan::Site & site)
 {
     // this assumes that there is only one site
-    auto dimensions = designFloorplan.siteUpperRightCorner(site);
+    auto dimensions = mDesignFloorplan.siteUpperRightCorner(site);
     return (float) dimensions.x();
 }
 
@@ -72,7 +72,7 @@ float Placer::siteWidth(const ophidian::floorplan::Site & site)
 float Placer::siteHeight(const ophidian::floorplan::Site & site)
 {
     // this assumes that there is only one site
-    auto dimensions = designFloorplan.siteUpperRightCorner(site);
+    auto dimensions = mDesignFloorplan.siteUpperRightCorner(site);
     return (float) dimensions.y();
 }
 
@@ -86,53 +86,53 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 // This assumes equal heights at all times
 void Placer::basicPlace()
 {
-    auto row_iter = designFloorplan.rowsRange().begin();
-    auto cell_iter = designNetlist.begin(Cell());
-
-    float row_x = (float) designFloorplan.origin(*row_iter).x();
-    float row_y = (float) designFloorplan.origin(*row_iter).y();
-    int sites_in_row = designFloorplan.numberOfSites(*row_iter);
-    int site_width = siteWidth(designFloorplan.site(*row_iter));
-    int site_height = siteHeight(designFloorplan.site(*row_iter));
-    int filled_sites_in_row = 0;
-
-    printf("site width: %d site height: %d\n", site_width, site_height);
-
-    while (cell_iter != designNetlist.end(Cell())) {
-        float cell_width = (float) cellUtil::cellWidth(*cell_iter, designLibraryMapping, designLibrary);
-        float cell_height = (float) cellUtil::cellHeight(*cell_iter, designLibraryMapping, designLibrary);
-        int cell_sites = ceil(cell_width / (float) site_width);
-
-        if ((cell_sites + filled_sites_in_row) > sites_in_row) {
-            row_iter++;
-            row_x = (float) designFloorplan.origin(*row_iter).x();
-            row_y = (float) designFloorplan.origin(*row_iter).y();
-
-            sites_in_row = designFloorplan.numberOfSites(*row_iter);
-            site_width = siteWidth(designFloorplan.site(*row_iter));
-
-            filled_sites_in_row = 0;
+    auto rowIter = mDesignFloorplan.rowsRange().begin();
+    auto cellIter = mDesignNetlist.begin(Cell());
+    float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
+    float rowY = (float) mDesignFloorplan.origin(*rowIter).y();
+    int sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
+    int siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
+    int siteHeight = this->siteHeight(mDesignFloorplan.site(*rowIter));
+    int filledSitesInRow = 0;
+    /* printf("site width: %d site height: %d\n", siteWidth, siteHeight); */
+    while (cellIter != mDesignNetlist.end(Cell())) {
+        float cellWidth = (float) cellUtil::cellWidth(*cellIter, mDesignLibraryMapping, mDesignLibrary);
+        float cellHeight = (float) cellUtil::cellHeight(*cellIter, mDesignLibraryMapping, mDesignLibrary);
+        int cellSites = ceil(cellWidth / (float) siteWidth);
+        if (!enoughSitesInRow(cellSites, filledSitesInRow, sitesInRow)){
+            goToNextRow(rowIter, rowX, rowY, sitesInRow, siteWidth, filledSitesInRow);
         }
-
-        float pos_x = (filled_sites_in_row) * site_width + row_x;
-        auto location = ophidian::util::LocationDbu(pos_x, row_y);
-        designPlacement.placeCell(*cell_iter, location);
-
-        // printf("cell_width: %.2f cell_height: %.2f\t cell_sites: %d\t filled_sites_in_row: %d\n", cell_width, cell_height, cell_sites, filled_sites_in_row);
-        filled_sites_in_row += cell_sites;
-        cell_iter++;
+        float posX = (filledSitesInRow) * siteWidth + rowX;
+        auto location = ophidian::util::LocationDbu(posX, rowY);
+        mDesignPlacement.placeCell(*cellIter, location);
+        // printf("cellWidth: %.2f cellHeight: %.2f\t cellSites: %d\t filledSitesInRow: %d\n", cellWidth, cellHeight, cellSites, filledSitesInRow);
+        filledSitesInRow += cellSites;
+        cellIter++;
     }
 }
 
+void Placer::goToNextRow(entity_system::EntitySystem <Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
+{
+            rowIter++;
+            rowX = (float) mDesignFloorplan.origin(*rowIter).x();
+            rowY = (float) mDesignFloorplan.origin(*rowIter).y();
+            sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
+            siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
+            filledSitesInRow = 0;
+}
 
+bool Placer::enoughSitesInRow(int cellSites, int filledSitesInRow, int sitesInRow)
+{
+    return (cellSites + filledSitesInRow) <= sitesInRow;
+}
 void Placer::printLocations()
 {
     printf("==================================\nLOCATIONS\n==================================\n");
-    for (auto cell_iter = designNetlist.begin(Cell()); cell_iter != designNetlist.end(Cell()); cell_iter++)
+    for (auto cell_iter = mDesignNetlist.begin(Cell()); cell_iter != mDesignNetlist.end(Cell()); cell_iter++)
     {
-        std::string name = designNetlist.name(*cell_iter);
-        float x = (float) designPlacement.cellLocation(*cell_iter).x();
-        float y = (float) designPlacement.cellLocation(*cell_iter).y();
+        std::string name = mDesignNetlist.name(*cell_iter);
+        float x = (float) mDesignPlacement.cellLocation(*cell_iter).x();
+        float y = (float) mDesignPlacement.cellLocation(*cell_iter).y();
         printf("Cell: %s\t (%.3f, %.3f)\n", name.c_str(), x, y);
     }
     printf("==================================\n");
