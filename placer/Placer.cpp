@@ -105,10 +105,12 @@ void Placer::basicPlace()
 
         if ((cell_sites + filled_sites_in_row) > sites_in_row) {
             row_iter++;
-            sites_in_row = designFloorplan.numberOfSites(*row_iter);
-            site_width = siteWidth(designFloorplan.site(*row_iter));
             row_x = (float) designFloorplan.origin(*row_iter).x();
             row_y = (float) designFloorplan.origin(*row_iter).y();
+
+            sites_in_row = designFloorplan.numberOfSites(*row_iter);
+            site_width = siteWidth(designFloorplan.site(*row_iter));
+
             filled_sites_in_row = 0;
         }
 
