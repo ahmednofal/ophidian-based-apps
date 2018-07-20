@@ -29,8 +29,8 @@ float Placer::calcCoreArea()
     return mArea;
 }
 
-
-void Placer::place()
+//void (*f)(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & , float & ,  float & ,int & , int & , int & )
+void Placer::placeAux(void (*f)(...))
 {
     auto rowIter = mDesignFloorplan.rowsRange().begin();
     float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
@@ -39,6 +39,10 @@ void Placer::place()
     int siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
     int siteHeight = this->siteHeight(mDesignFloorplan.site(*rowIter));
     int filledSitesInRow = 0;
+    f(rowIter, rowX, rowY, sitesInRow, siteWidth,  filledSitesInRow);
+}
+void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
+{
    for (auto netIter = mDesignNetlist.begin(Net()); netIter != mDesignNetlist.end(Net()); netIter++)
    {
        auto netPins = mDesignNetlist.pins(*netIter);
@@ -64,7 +68,6 @@ void Placer::place()
        
     }
 }
-
 void Placer::place1stCell(const Cell & cell)
 {
     auto location = ophidian::util::LocationDbu(0,0);

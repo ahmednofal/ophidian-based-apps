@@ -11,7 +11,7 @@
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/floorplan/Floorplan.h>
 #include <ophidian/entity_system/EntitySystem.h>
-
+#include <functional>
 
 class Placer {
 using Design=ophidian::design::Design;
@@ -46,6 +46,9 @@ private:
     float siteWidth(const ophidian::floorplan::Site &);
     float siteHeight(const ophidian::floorplan::Site &);
     bool enoughSitesInRow(int, int, int);
+    //(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & , float & ,  float & ,int & , int & , int & )
+    void placeAux(void (*f)(...));
+    void connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow);
 };
 
 #endif
