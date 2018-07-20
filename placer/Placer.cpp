@@ -30,28 +30,40 @@ float Placer::calcCoreArea()
 }
 
 
-/* void Placer::place(Design & currentDesign) */
-/* { */
-/*    // We are going to be doing constructive placement */
-/*    // 1- Choose the first cell in the internal data structure format of the ophidian library */
-/*    // Bla() : Lvalue which is function definition */  
+void Placer::place()
+{
+    auto rowIter = mDesignFloorplan.rowsRange().begin();
+    float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
+    float rowY = (float) mDesignFloorplan.origin(*rowIter).y();
+    int sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
+    int siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
+    int siteHeight = this->siteHeight(mDesignFloorplan.site(*rowIter));
+    int filledSitesInRow = 0;
+   for (auto netIter = mDesignNetlist.begin(Net()); netIter != mDesignNetlist.end(Net()); netIter++)
+   {
+       auto netPins = mDesignNetlist.pins(*netIter);
+       for (auto aPin : netPins)
+       {
+           auto cellToBePlaced = mDesignNetlist.cell(aPin);
+           if (mDesignPlacement.isFixed(cellToBePlaced))
+           {
+               float cellWidth = (float) cellUtil::cellWidth(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
+               float cellHeight = (float) cellUtil::cellHeight(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
+               int cellSites = ceil(cellWidth / (float) siteWidth);
+               if (!enoughSitesInRow(cellSites, filledSitesInRow, sitesInRow)){
+                   goToNextRow(rowIter, rowX, rowY, sitesInRow, siteWidth, filledSitesInRow);
+               }
+               float posX = (filledSitesInRow) * siteWidth + rowX;
+               auto location = ophidian::util::LocationDbu(posX, rowY);
+               mDesignPlacement.placeCell(cellToBePlaced, location);
+               filledSitesInRow += cellSites;
+               mDesignPlacement.fixLocation(cellToBePlaced, true);
+           }
 
-/*    auto fstCell = design.netlist().begin(Cell()); */ 
-/*    place1stCell(*fstCell); */
-/*    auto x = fstCell+1; */
-/*    for (auto iter = fstCell+1; iter != designNetlist.end(Cell()); iter++) */
-/*    { */
-        
-/*    } */
-/*    // 2- Use the legal function to constraint the placement range */
-/*    // 3- Place the cell randomly */
-/*    // 4- Traverse the netlist for the connected cells */
-/*    // 5- place the cells one by one closer to their connected cell, closer: shorter wire length using the manhattan distance */
-/*    // */
-/*    // */
-/*    // 6- Till u reach the last cell of the netlist */
-/*    // */
-/* } */
+       }
+       
+    }
+}
 
 void Placer::place1stCell(const Cell & cell)
 {
@@ -84,7 +96,7 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 //      repeat untill all cell are placed
 // 
 // This assumes equal heights at all times
-void Placer::basicPlace()
+void Placer::basicPlace(void (*f))
 {
     auto rowIter = mDesignFloorplan.rowsRange().begin();
     auto cellIter = mDesignNetlist.begin(Cell());

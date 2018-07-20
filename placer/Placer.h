@@ -16,15 +16,16 @@
 class Placer {
 using Design=ophidian::design::Design;
 using Cell=ophidian::circuit::Cell;
+using Net=ophidian::circuit::Net;
 
 public:
     Placer(Design & );
     Placer();
     ~Placer();
     void inputDesign(Design & );
-    void place(Design & );
+    void place();
     void printLocations();
-    void basicPlace();
+    void basicPlace(void (*f));
 
 private:
     float mArea = 0;
