@@ -10,12 +10,19 @@ Placer::Placer(Design & design) :
     mDesignLibraryMapping(design.libraryMapping()),
     mDesignFloorplan(design.floorplan()),
     mDesignPlacementMapping(design.placementMapping()),
-    mDesignPlacement(design.placement())
+    mDesignPlacement(design.placement()),
+    mFstSite(mDesignFloorplan.site(*mDesignFloorplan.rowsRange().begin())),
+    mSiteWidth(this->siteWidth(mFstSite)),
+    mSiteHeight(this->siteHeight(mFstSite))
 {
 }
 
 Placer::~Placer()
 {
+}
+void Placer::place()
+{
+    placeAux(this->basicPlace);
 }
 
 float Placer::calcCoreArea()
@@ -29,19 +36,17 @@ float Placer::calcCoreArea()
     return mArea;
 }
 
-//void (*f)(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & , float & ,  float & ,int & , int & , int & )
-void Placer::placeAux(void (*f)(...))
+void Placer::placeAux(void (*f)(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow))
 {
     auto rowIter = mDesignFloorplan.rowsRange().begin();
     float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
     float rowY = (float) mDesignFloorplan.origin(*rowIter).y();
     int sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
-    int siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
-    int siteHeight = this->siteHeight(mDesignFloorplan.site(*rowIter));
     int filledSitesInRow = 0;
-    f(rowIter, rowX, rowY, sitesInRow, siteWidth,  filledSitesInRow);
+    f(rowIter,  rowX, rowY, sitesInRow,  filledSitesInRow);
 }
-void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
+
+void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
    for (auto netIter = mDesignNetlist.begin(Net()); netIter != mDesignNetlist.end(Net()); netIter++)
    {
@@ -51,22 +56,27 @@ void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::
            auto cellToBePlaced = mDesignNetlist.cell(aPin);
            if (mDesignPlacement.isFixed(cellToBePlaced))
            {
-               float cellWidth = (float) cellUtil::cellWidth(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
-               float cellHeight = (float) cellUtil::cellHeight(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
-               int cellSites = ceil(cellWidth / (float) siteWidth);
-               if (!enoughSitesInRow(cellSites, filledSitesInRow, sitesInRow)){
-                   goToNextRow(rowIter, rowX, rowY, sitesInRow, siteWidth, filledSitesInRow);
-               }
-               float posX = (filledSitesInRow) * siteWidth + rowX;
-               auto location = ophidian::util::LocationDbu(posX, rowY);
-               mDesignPlacement.placeCell(cellToBePlaced, location);
-               filledSitesInRow += cellSites;
-               mDesignPlacement.fixLocation(cellToBePlaced, true);
+               legallyPlace(cellToBePlaced, rowIter, rowX, rowY, sitesInRow,filledSitesInRow);
            }
 
        }
        
     }
+}
+void Placer::legallyPlace(const Cell & cellToBePlaced, ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+{
+
+    float cellWidth = (float) cellUtil::cellWidth(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
+    float cellHeight = (float) cellUtil::cellHeight(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
+    int cellSites = ceil(cellWidth / (float) mSiteWidth);
+    if (!enoughSitesInRow(cellSites, filledSitesInRow, sitesInRow)){
+       goToNextRow(rowIter, rowX, rowY, sitesInRow, filledSitesInRow);
+    }
+    float posX = (filledSitesInRow) * mSiteWidth + rowX;
+    auto location = ophidian::util::LocationDbu(posX, rowY);
+    mDesignPlacement.placeCell(cellToBePlaced, location);
+    filledSitesInRow += cellSites;
+    mDesignPlacement.fixLocation(cellToBePlaced, true);
 }
 void Placer::place1stCell(const Cell & cell)
 {
@@ -99,40 +109,20 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 //      repeat untill all cell are placed
 // 
 // This assumes equal heights at all times
-void Placer::basicPlace(void (*f))
-{
-    auto rowIter = mDesignFloorplan.rowsRange().begin();
+void Placer::basicPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow){
     auto cellIter = mDesignNetlist.begin(Cell());
-    float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
-    float rowY = (float) mDesignFloorplan.origin(*rowIter).y();
-    int sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
-    int siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
-    int siteHeight = this->siteHeight(mDesignFloorplan.site(*rowIter));
-    int filledSitesInRow = 0;
-    /* printf("site width: %d site height: %d\n", siteWidth, siteHeight); */
     while (cellIter != mDesignNetlist.end(Cell())) {
-        float cellWidth = (float) cellUtil::cellWidth(*cellIter, mDesignLibraryMapping, mDesignLibrary);
-        float cellHeight = (float) cellUtil::cellHeight(*cellIter, mDesignLibraryMapping, mDesignLibrary);
-        int cellSites = ceil(cellWidth / (float) siteWidth);
-        if (!enoughSitesInRow(cellSites, filledSitesInRow, sitesInRow)){
-            goToNextRow(rowIter, rowX, rowY, sitesInRow, siteWidth, filledSitesInRow);
-        }
-        float posX = (filledSitesInRow) * siteWidth + rowX;
-        auto location = ophidian::util::LocationDbu(posX, rowY);
-        mDesignPlacement.placeCell(*cellIter, location);
-        // printf("cellWidth: %.2f cellHeight: %.2f\t cellSites: %d\t filledSitesInRow: %d\n", cellWidth, cellHeight, cellSites, filledSitesInRow);
-        filledSitesInRow += cellSites;
+        legallyPlace(*cellIter, rowIter, rowX, rowY, sitesInRow, filledSitesInRow);
         cellIter++;
     }
 }
 
-void Placer::goToNextRow(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow, int & siteWidth, int & filledSitesInRow)
+void Placer::goToNextRow(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
             rowIter++;
             rowX = (float) mDesignFloorplan.origin(*rowIter).x();
             rowY = (float) mDesignFloorplan.origin(*rowIter).y();
             sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
-            siteWidth = this->siteWidth(mDesignFloorplan.site(*rowIter));
             filledSitesInRow = 0;
 }
 
