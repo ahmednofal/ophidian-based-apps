@@ -22,7 +22,7 @@ Placer::~Placer()
 }
 void Placer::place()
 {
-    placeAux(&Placer::basicPlace);
+    placeAux(&Placer::connectivityPlace);
 }
 
 float Placer::calcCoreArea()
