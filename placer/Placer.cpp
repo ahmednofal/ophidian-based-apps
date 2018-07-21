@@ -22,7 +22,7 @@ Placer::~Placer()
 }
 void Placer::place()
 {
-    placeAux(this->basicPlace);
+    placeAux(&Placer::basicPlace);
 }
 
 float Placer::calcCoreArea()
@@ -36,17 +36,17 @@ float Placer::calcCoreArea()
     return mArea;
 }
 
-void Placer::placeAux(void (*f)(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow))
+void Placer::placeAux(void (Placer::*f)(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow))
 {
     auto rowIter = mDesignFloorplan.rowsRange().begin();
     float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
     float rowY = (float) mDesignFloorplan.origin(*rowIter).y();
     int sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
     int filledSitesInRow = 0;
-    f(rowIter,  rowX, rowY, sitesInRow,  filledSitesInRow);
+    (this->*f)(rowIter,  rowX, rowY, sitesInRow,  filledSitesInRow);
 }
 
-void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::connectivityPlace(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
    for (auto netIter = mDesignNetlist.begin(Net()); netIter != mDesignNetlist.end(Net()); netIter++)
    {
@@ -63,7 +63,7 @@ void Placer::connectivityPlace(ophidian::entity_system::EntitySystem <ophidian::
        
     }
 }
-void Placer::legallyPlace(const Cell & cellToBePlaced, ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::legallyPlace(const Cell & cellToBePlaced, RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
 
     float cellWidth = (float) cellUtil::cellWidth(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
@@ -109,7 +109,7 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 //      repeat untill all cell are placed
 // 
 // This assumes equal heights at all times
-void Placer::basicPlace(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow){
+void Placer::basicPlace(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow){
     auto cellIter = mDesignNetlist.begin(Cell());
     while (cellIter != mDesignNetlist.end(Cell())) {
         legallyPlace(*cellIter, rowIter, rowX, rowY, sitesInRow, filledSitesInRow);
@@ -117,7 +117,7 @@ void Placer::basicPlace(ophidian::entity_system::EntitySystem <ophidian::floorpl
     }
 }
 
-void Placer::goToNextRow(ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::goToNextRow(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
             rowIter++;
             rowX = (float) mDesignFloorplan.origin(*rowIter).x();
