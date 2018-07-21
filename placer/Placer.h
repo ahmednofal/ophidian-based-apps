@@ -12,12 +12,19 @@
 #include <ophidian/floorplan/Floorplan.h>
 #include <ophidian/entity_system/EntitySystem.h>
 #include <functional>
+#include <stdexcept>
+#include <iostream>
+
+using namespace std;
 
 class Placer {
 using Design=ophidian::design::Design;
 using Cell=ophidian::circuit::Cell;
 using Net=ophidian::circuit::Net;
 using ConstRowIterator = ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator;
+using Output = ophidian::circuit::Output;
+using Input = ophidian::circuit::Input;
+
 public:
     Placer(Design & );
     Placer();

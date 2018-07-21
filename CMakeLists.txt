@@ -29,6 +29,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Set Cmake prefix path for buildind with local dependencies
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/dependencies)
+# Set to release with debug options
+set(CMAKE_BUILD_TYPE RelWithDebInfo)
 
 find_package(ophidian 0.1 REQUIRED CONFIG)
 

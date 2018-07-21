@@ -53,8 +53,11 @@ void Placer::connectivityPlace(ConstRowIterator & rowIter, float & rowX,  float 
        auto netPins = mDesignNetlist.pins(*netIter);
        for (auto aPin : netPins)
        {
-           auto cellToBePlaced = mDesignNetlist.cell(aPin);
-           if (mDesignPlacement.isFixed(cellToBePlaced))
+           auto cellToBePlaced = Cell();
+           if (mDesignNetlist.output(aPin)==Output() or mDesignNetlist.input(aPin)==Input() )
+               continue;
+           cellToBePlaced = mDesignNetlist.cell(aPin);
+           if (!mDesignPlacement.isFixed(cellToBePlaced))
            {
                legallyPlace(cellToBePlaced, rowIter, rowX, rowY, sitesInRow,filledSitesInRow);
            }
