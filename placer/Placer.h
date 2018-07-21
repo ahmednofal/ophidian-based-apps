@@ -57,6 +57,7 @@ private:
     void connectivityPlace(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
     void basicPlace(ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
     void legallyPlace(const Cell & cellToBePlaced, ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
+    void relieveFix();
 };
 
 #endif
