@@ -36,7 +36,7 @@ float Placer::calcCoreArea()
     return mArea;
 }
 
-void Placer::placeAux(void (Placer::*f)(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow))
+void Placer::placeAux(void (Placer::*f)(ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow))
 {
     auto rowIter = mDesignFloorplan.rowsRange().begin();
     float rowX = (float) mDesignFloorplan.origin(*rowIter).x();
@@ -46,7 +46,7 @@ void Placer::placeAux(void (Placer::*f)(RowIterator & rowIter,  float & rowX,  f
     (this->*f)(rowIter,  rowX, rowY, sitesInRow,  filledSitesInRow);
 }
 
-void Placer::connectivityPlace(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::connectivityPlace(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
    for (auto netIter = mDesignNetlist.begin(Net()); netIter != mDesignNetlist.end(Net()); netIter++)
    {
@@ -63,7 +63,7 @@ void Placer::connectivityPlace(RowIterator & rowIter, float & rowX,  float & row
        
     }
 }
-void Placer::legallyPlace(const Cell & cellToBePlaced, RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::legallyPlace(const Cell & cellToBePlaced, ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
 
     float cellWidth = (float) cellUtil::cellWidth(cellToBePlaced, mDesignLibraryMapping, mDesignLibrary);
@@ -109,7 +109,7 @@ float Placer::siteHeight(const ophidian::floorplan::Site & site)
 //      repeat untill all cell are placed
 // 
 // This assumes equal heights at all times
-void Placer::basicPlace(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow){
+void Placer::basicPlace(ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow){
     auto cellIter = mDesignNetlist.begin(Cell());
     while (cellIter != mDesignNetlist.end(Cell())) {
         legallyPlace(*cellIter, rowIter, rowX, rowY, sitesInRow, filledSitesInRow);
@@ -117,7 +117,7 @@ void Placer::basicPlace(RowIterator & rowIter,  float & rowX,  float & rowY,int 
     }
 }
 
-void Placer::goToNextRow(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
+void Placer::goToNextRow(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
             rowIter++;
             rowX = (float) mDesignFloorplan.origin(*rowIter).x();

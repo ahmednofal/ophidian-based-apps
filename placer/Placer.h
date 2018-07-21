@@ -17,7 +17,7 @@ class Placer {
 using Design=ophidian::design::Design;
 using Cell=ophidian::circuit::Cell;
 using Net=ophidian::circuit::Net;
-using RowIterator = ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator;
+using ConstRowIterator = ophidian::entity_system::EntitySystem <ophidian::floorplan::Row>::const_iterator;
 public:
     Placer(Design & );
     Placer();
@@ -38,7 +38,7 @@ private:
     ophidian::floorplan::Site mFstSite;
     int mSiteWidth;
     int mSiteHeight;
-    void goToNextRow(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
+    void goToNextRow(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
     int dyeWidth();
     int dyeHeight();
     float calcCoreArea();
@@ -46,10 +46,10 @@ private:
     float siteWidth(const ophidian::floorplan::Site &);
     float siteHeight(const ophidian::floorplan::Site &);
     bool enoughSitesInRow(int, int, int);
-    void placeAux(void (Placer::*f)(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow));
-    void connectivityPlace(RowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
-    void basicPlace(RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
-    void legallyPlace(const Cell & cellToBePlaced, RowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
+    void placeAux(void (Placer::*f)(ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow));
+    void connectivityPlace(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
+    void basicPlace(ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
+    void legallyPlace(const Cell & cellToBePlaced, ConstRowIterator & rowIter,  float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow);
 };
 
 #endif
