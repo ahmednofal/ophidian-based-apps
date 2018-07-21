@@ -54,13 +54,25 @@ void Placer::connectivityPlace(ConstRowIterator & rowIter, float & rowX,  float 
        for (auto aPin : netPins)
        {
            auto cellToBePlaced = Cell();
+           cout << "NET\t" << mDesignNetlist.name(*netIter)<< "\t" << "PIN\t" << mDesignNetlist.name(aPin) << endl;
            if (mDesignNetlist.output(aPin)==Output() and mDesignNetlist.input(aPin)==Input() )
            {
                cellToBePlaced = mDesignNetlist.cell(aPin);
+               /* cout << mDesignNetlist.name(cellToBePlaced) << endl; */
                if (!mDesignPlacement.isFixed(cellToBePlaced))
                {
+                   cout << mDesignNetlist.name(cellToBePlaced) << endl;
                    legallyPlace(cellToBePlaced, rowIter, rowX, rowY, sitesInRow,filledSitesInRow);
                }
+           }
+           else
+           {
+               if (cellToBePlaced != Cell())
+               cout << "cell with pin as in or out" << mDesignNetlist.name(cellToBePlaced) << endl;
+               if (mDesignNetlist.output(aPin)!=Output())
+                   cout << "input of pin\t" << mDesignNetlist.name(aPin) << '\t' <<endl;
+               else
+                   cout << "output of pin\t" << mDesignNetlist.name(aPin) << '\t' <<endl;
            }
 
        }
