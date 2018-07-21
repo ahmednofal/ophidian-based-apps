@@ -39,7 +39,7 @@ int main(int argc, char** argv)
     
     Placer placer(myDesign);
     placer.printLocations();
-    placer.basicPlace();
+    placer.place();
     printf("After placing\n");
     placer.printLocations();
 
