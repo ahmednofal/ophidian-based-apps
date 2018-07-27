@@ -27,7 +27,7 @@ bool WireLength::isIO(Pin & pin)
     using Input = ophidian::circuit::Input;
     using Output = ophidian::circuit::Output;
 
-    return (netlist.input(pin) == Input() && netlist.output(pin) == Output());
+    return !(netlist.input(pin) == Input() && netlist.output(pin) == Output());
 }
 
 
