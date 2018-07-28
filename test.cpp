@@ -39,13 +39,13 @@ int main(int argc, char** argv)
     auto & myDesign = builder.build();
     WireLength WireLength(myDesign);
     
-    Placer placer(myDesign);
+//    Placer placer(myDesign);
     printf("WireLength: %.2f\n", WireLength.estimate());
-    placer.printLocations();
-    placer.place();
-    printf("After placing\n");
-    printf("WireLength: %.2f\n", WireLength.estimate());
-    placer.printLocations();
+//    placer.printLocations();
+//    placer.place();
+//    printf("After placing\n");
+//    printf("WireLength: %.2f\n", WireLength.estimate());
+//    placer.printLocations();
 
     return 0;
 } 
