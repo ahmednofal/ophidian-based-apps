@@ -1,4 +1,4 @@
-#include "placer/WireLength.h"
+#include "placer/WireEstimate.h"
 
 WireLength::WireLength(ophidian::design::Design & design) :
     design(design),
@@ -44,9 +44,4 @@ std::vector<WireLength::Point> WireLength::pinsPositions(Pins & pins)
         }
     }
     return positions;
-}
-
-
-WireLength::~WireLength()
-{
 }

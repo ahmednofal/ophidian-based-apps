@@ -74,7 +74,6 @@ add_executable(placer_test
 
 target_link_libraries(placer_test
     PUBLIC ophidian::ophidian_design
-    PUBLIC ophidian::ophidian_interconnection
     myPlacer
 )
 
