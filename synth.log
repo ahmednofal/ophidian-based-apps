@@ -1,0 +1,18 @@
+Running blif2cel.tcl
+Loaded LEF file (/usr/share/qflow/tech/osu035/osu035_stdcells.lef) for reading...
+Error: can't open file ../cpu.blif for reading!
+blif2cel failure:  No file cpu.cel.
+Premature exit.
+Synthesis flow stopped due to error condition.
+Running blif2cel.tcl
+Loaded LEF file (/usr/share/qflow/tech/osu035/osu035_stdcells.lef) for reading...
+Error: can't open file ../cpu.blif for reading!
+blif2cel failure:  No file cpu.cel.
+Premature exit.
+Synthesis flow stopped due to error condition.
+Running blif2cel.tcl
+Loaded LEF file (/usr/share/qflow/tech/osu035/osu035_stdcells.lef) for reading...
+Error: can't open file ../cpu.blif for reading!
+blif2cel failure:  No file cpu.cel.
+Premature exit.
+Synthesis flow stopped due to error condition.

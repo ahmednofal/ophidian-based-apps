@@ -1,0 +1,1886 @@
+Running yosys for verilog parsing and synthesis
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2016  Clifford Wolf <clifford@clifford.at>           |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.7 (git sha1 61f6811, gcc 6.2.0-11ubuntu1 -O2 -fdebug-prefix-map=/build/yosys-OIL3SR/yosys-0.7=. -fstack-protector-strong -fPIC -Os)
+
+
+-- Executing script file `pic27ch.ys' --
+
+1. Executing Liberty frontend.
+Imported 39 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend.
+Parsing Verilog input from `pic27ch.v' to AST representation.
+Generating RTLIL representation for module `\pic27ch'.
+Generating RTLIL representation for module `\TopLevel432b'.
+Generating RTLIL representation for module `\PriorityA'.
+Generating RTLIL representation for module `\PriorityB'.
+Generating RTLIL representation for module `\PriorityC'.
+Generating RTLIL representation for module `\EncodeChan'.
+Generating RTLIL representation for module `\DecodeChan'.
+Successfully finished Verilog frontend.
+
+3. Executing SYNTH pass.
+
+3.1. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1.1. Analyzing design hierarchy..
+Top module:  \pic27ch
+Used module:     \TopLevel432b
+Used module:         \DecodeChan
+Used module:         \EncodeChan
+Used module:         \PriorityC
+Used module:         \PriorityB
+Used module:         \PriorityA
+
+3.1.2. Analyzing design hierarchy..
+Top module:  \pic27ch
+Used module:     \TopLevel432b
+Used module:         \DecodeChan
+Used module:         \EncodeChan
+Used module:         \PriorityC
+Used module:         \PriorityB
+Used module:         \PriorityA
+Removed 0 unused modules.
+Mapping positional arguments of cell TopLevel432b.M5 (DecodeChan).
+Mapping positional arguments of cell TopLevel432b.M4 (EncodeChan).
+Mapping positional arguments of cell TopLevel432b.M3 (PriorityC).
+Mapping positional arguments of cell TopLevel432b.M2 (PriorityB).
+Mapping positional arguments of cell TopLevel432b.M1 (PriorityA).
+Mapping positional arguments of cell pic27ch.Ckt432 (TopLevel432b).
+
+3.2. Executing PROC pass (convert processes to netlists).
+
+3.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.2.3. Executing PROC_INIT pass (extract init attributes).
+
+3.2.4. Executing PROC_ARST pass (detect async resets in processes).
+
+3.2.5. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.2.6. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.2.7. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.2.8. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.3. Executing OPT_EXPR pass (perform const folding).
+
+3.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.5. Executing CHECK pass (checking for obvious problems).
+checking module DecodeChan..
+checking module EncodeChan..
+checking module PriorityA..
+checking module PriorityB..
+checking module PriorityC..
+checking module TopLevel432b..
+checking module pic27ch..
+found and reported 0 problems.
+
+3.6. Executing OPT pass (performing simple optimizations).
+
+3.6.1. Executing OPT_EXPR pass (perform const folding).
+
+3.6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DecodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \EncodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityA..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityB..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityC..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TopLevel432b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DecodeChan.
+    New input vector for $reduce_and cell $reduce_and$pic27ch.v:140$34: { \I [0] \I [1] \I [2] \I [3] \I [4] \I [5] \I [6] \I [7] }
+  Optimizing cells in module \DecodeChan.
+  Optimizing cells in module \EncodeChan.
+  Optimizing cells in module \PriorityA.
+    New input vector for $reduce_and cell $reduce_and$pic27ch.v:74$4: { \EAb [0] \EAb [1] \EAb [2] \EAb [3] \EAb [4] \EAb [5] \EAb [6] \EAb [7] \EAb [8] }
+  Optimizing cells in module \PriorityA.
+  Optimizing cells in module \PriorityB.
+    New input vector for $reduce_and cell $reduce_and$pic27ch.v:92$12: { \XEB [0] \XEB [1] \XEB [2] \XEB [3] \XEB [4] \XEB [5] \XEB [6] \XEB [7] \XEB [8] }
+  Optimizing cells in module \PriorityB.
+  Optimizing cells in module \PriorityC.
+    New input vector for $reduce_and cell $reduce_and$pic27ch.v:109$21: { \XEC [0] \XEC [1] \XEC [2] \XEC [3] \XEC [4] \XEC [5] \XEC [6] \XEC [7] \XEC [8] }
+  Optimizing cells in module \PriorityC.
+  Optimizing cells in module \TopLevel432b.
+  Optimizing cells in module \pic27ch.
+Performed a total of 4 changes.
+
+3.6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.6.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.6.8. Executing OPT_EXPR pass (perform const folding).
+
+3.6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+3.6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DecodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \EncodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityA..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityB..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityC..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TopLevel432b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DecodeChan.
+  Optimizing cells in module \EncodeChan.
+  Optimizing cells in module \PriorityA.
+  Optimizing cells in module \PriorityB.
+  Optimizing cells in module \PriorityC.
+  Optimizing cells in module \TopLevel432b.
+  Optimizing cells in module \pic27ch.
+Performed a total of 0 changes.
+
+3.6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.6.13. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.6.15. Executing OPT_EXPR pass (perform const folding).
+
+3.6.16. Finished OPT passes. (There is nothing left to do.)
+
+3.7. Executing WREDUCE pass (reducing word size of cells).
+
+3.8. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module DecodeChan:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module EncodeChan:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module PriorityA:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module PriorityB:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module PriorityC:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module TopLevel432b:
+  created 0 $alu and 0 $macc cells.
+Extracting $alu and $macc cells in module pic27ch:
+  created 0 $alu and 0 $macc cells.
+
+3.9. Executing SHARE pass (SAT-based resource sharing).
+
+3.10. Executing OPT pass (performing simple optimizations).
+
+3.10.1. Executing OPT_EXPR pass (perform const folding).
+
+3.10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DecodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \EncodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityA..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityB..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityC..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TopLevel432b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DecodeChan.
+  Optimizing cells in module \EncodeChan.
+  Optimizing cells in module \PriorityA.
+  Optimizing cells in module \PriorityB.
+  Optimizing cells in module \PriorityC.
+  Optimizing cells in module \TopLevel432b.
+  Optimizing cells in module \pic27ch.
+Performed a total of 0 changes.
+
+3.10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.10.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.10.8. Executing OPT_EXPR pass (perform const folding).
+
+3.10.9. Finished OPT passes. (There is nothing left to do.)
+
+3.11. Executing FSM pass (extract and optimize FSM).
+
+3.11.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+3.11.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+3.11.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.11.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+3.11.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+3.11.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+3.11.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+3.12. Executing OPT pass (performing simple optimizations).
+
+3.12.1. Executing OPT_EXPR pass (perform const folding).
+
+3.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.12.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.12.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.12.5. Finished fast OPT passes.
+
+3.13. Executing MEMORY pass.
+
+3.13.1. Executing MEMORY_DFF pass (merging $dff cells to $memrd and $memwr).
+
+3.13.2. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.13.3. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+3.13.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.13.5. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+3.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.15. Executing OPT pass (performing simple optimizations).
+
+3.15.1. Executing OPT_EXPR pass (perform const folding).
+
+3.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.15.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.15.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.15.5. Finished fast OPT passes.
+
+3.16. Executing MEMORY_MAP pass (converting $mem cells to logic and flip-flops).
+
+3.17. Executing OPT pass (performing simple optimizations).
+
+3.17.1. Executing OPT_EXPR pass (perform const folding).
+
+3.17.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.17.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DecodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \EncodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityA..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityB..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityC..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TopLevel432b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+3.17.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DecodeChan.
+  Optimizing cells in module \EncodeChan.
+  Optimizing cells in module \PriorityA.
+  Optimizing cells in module \PriorityB.
+  Optimizing cells in module \PriorityC.
+  Optimizing cells in module \TopLevel432b.
+  Optimizing cells in module \pic27ch.
+Performed a total of 0 changes.
+
+3.17.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.17.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.17.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.17.8. Executing OPT_EXPR pass (perform const folding).
+
+3.17.9. Finished OPT passes. (There is nothing left to do.)
+
+3.18. Executing TECHMAP pass (map to technology primitives).
+
+3.18.1. Executing Verilog-2005 frontend.
+Parsing Verilog input from `<techmap.v>' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+Mapping PriorityA.$not$pic27ch.v:72$1 ($not) with simplemap.
+Mapping PriorityA.$and$pic27ch.v:73$2 ($and) with simplemap.
+Mapping PriorityA.$not$pic27ch.v:73$3 ($not) with simplemap.
+Mapping PriorityA.$reduce_and$pic27ch.v:74$4 ($reduce_and) with simplemap.
+Mapping PriorityA.$logic_not$pic27ch.v:74$5 ($logic_not) with simplemap.
+Mapping PriorityA.$xor$pic27ch.v:75$6 ($xor) with simplemap.
+Mapping PriorityB.$not$pic27ch.v:89$7 ($not) with simplemap.
+Mapping PriorityB.$or$pic27ch.v:90$8 ($or) with simplemap.
+Mapping PriorityB.$not$pic27ch.v:90$9 ($not) with simplemap.
+Mapping PriorityB.$and$pic27ch.v:91$10 ($and) with simplemap.
+Mapping PriorityB.$not$pic27ch.v:91$11 ($not) with simplemap.
+Mapping PriorityB.$reduce_and$pic27ch.v:92$12 ($reduce_and) with simplemap.
+Mapping PriorityB.$logic_not$pic27ch.v:92$13 ($logic_not) with simplemap.
+Mapping PriorityB.$xor$pic27ch.v:93$14 ($xor) with simplemap.
+Mapping PriorityC.$not$pic27ch.v:106$15 ($not) with simplemap.
+Mapping PriorityC.$or$pic27ch.v:107$16 ($or) with simplemap.
+Mapping PriorityC.$not$pic27ch.v:107$17 ($not) with simplemap.
+Mapping PriorityC.$and$pic27ch.v:108$18 ($and) with simplemap.
+Mapping PriorityC.$and$pic27ch.v:108$19 ($and) with simplemap.
+Mapping PriorityC.$not$pic27ch.v:108$20 ($not) with simplemap.
+Mapping PriorityC.$reduce_and$pic27ch.v:109$21 ($reduce_and) with simplemap.
+Mapping PriorityC.$logic_not$pic27ch.v:109$22 ($logic_not) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:123$23 ($and) with simplemap.
+Mapping EncodeChan.$not$pic27ch.v:123$24 ($not) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:124$25 ($and) with simplemap.
+Mapping EncodeChan.$not$pic27ch.v:124$26 ($not) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:125$27 ($and) with simplemap.
+Mapping EncodeChan.$not$pic27ch.v:125$28 ($not) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:126$29 ($and) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:126$30 ($and) with simplemap.
+Mapping EncodeChan.$and$pic27ch.v:126$31 ($and) with simplemap.
+Mapping EncodeChan.$not$pic27ch.v:126$32 ($not) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:139$33 ($not) with simplemap.
+Mapping DecodeChan.$reduce_and$pic27ch.v:140$34 ($reduce_and) with simplemap.
+Mapping DecodeChan.$or$pic27ch.v:141$35 ($or) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:141$36 ($not) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:143$37 ($not) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:144$38 ($not) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:145$39 ($not) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:146$40 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:148$41 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:148$42 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:149$43 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:149$44 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:149$45 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:150$46 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:150$47 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:150$48 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:150$49 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:151$50 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:151$51 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:151$52 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:151$53 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:153$54 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:153$55 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:153$56 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:153$57 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:154$58 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:154$59 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:154$60 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:154$61 ($not) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:155$62 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:155$63 ($and) with simplemap.
+Mapping DecodeChan.$and$pic27ch.v:155$64 ($and) with simplemap.
+Mapping DecodeChan.$not$pic27ch.v:155$65 ($not) with simplemap.
+No more expansions possible.
+
+3.19. Executing OPT pass (performing simple optimizations).
+
+3.19.1. Executing OPT_EXPR pass (perform const folding).
+
+3.19.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+  Cell `$auto$simplemap.cc:85:simplemap_bitop$417' is identical to cell `$auto$simplemap.cc:136:simplemap_reduce$385'.
+    Redirecting output \Y: $and$pic27ch.v:154$58_Y = $auto$simplemap.cc:127:simplemap_reduce$384 [0]
+    Removing $_AND_ cell `$auto$simplemap.cc:85:simplemap_bitop$417' from module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 1 cells.
+
+3.19.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.19.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.19.5. Finished fast OPT passes.
+
+3.20. Executing ABC pass (technology mapping using ABC).
+
+3.20.1. Extracting gate netlist of module `\DecodeChan' to `<abc-temp-dir>/input.blif'..
+Extracted 38 gates and 47 wires to a netlist network with 9 inputs and 4 outputs.
+
+3.20.1.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       10
+ABC RESULTS:              AOI3 cells:        2
+ABC RESULTS:              NAND cells:        2
+ABC RESULTS:               NOT cells:        5
+ABC RESULTS:              OAI3 cells:        3
+ABC RESULTS:                OR cells:        2
+ABC RESULTS:        internal signals:       34
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+3.20.2. Extracting gate netlist of module `\EncodeChan' to `<abc-temp-dir>/input.blif'..
+Extracted 90 gates and 129 wires to a netlist network with 39 inputs and 9 outputs.
+
+3.20.2.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       18
+ABC RESULTS:              NAND cells:       18
+ABC RESULTS:                OR cells:       18
+ABC RESULTS:        internal signals:       81
+ABC RESULTS:           input signals:       39
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+
+3.20.3. Extracting gate netlist of module `\PriorityA' to `<abc-temp-dir>/input.blif'..
+Extracted 45 gates and 63 wires to a netlist network with 18 inputs and 10 outputs.
+
+3.20.3.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       12
+ABC RESULTS:              AOI4 cells:        2
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        9
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:               XOR cells:        9
+ABC RESULTS:        internal signals:       35
+ABC RESULTS:           input signals:       18
+ABC RESULTS:          output signals:       10
+Removing temp directory.
+
+3.20.4. Extracting gate netlist of module `\PriorityB' to `<abc-temp-dir>/input.blif'..
+Extracted 63 gates and 90 wires to a netlist network with 27 inputs and 10 outputs.
+
+3.20.4.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       21
+ABC RESULTS:              AOI4 cells:        2
+ABC RESULTS:              NAND cells:        1
+ABC RESULTS:               NOR cells:        2
+ABC RESULTS:               NOT cells:        9
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:               XOR cells:        9
+ABC RESULTS:        internal signals:       53
+ABC RESULTS:           input signals:       27
+ABC RESULTS:          output signals:       10
+Removing temp directory.
+
+3.20.5. Extracting gate netlist of module `\PriorityC' to `<abc-temp-dir>/input.blif'..
+Extracted 63 gates and 99 wires to a netlist network with 36 inputs and 1 outputs.
+
+3.20.5.1. Executing ABC.
+Running ABC command: berkeley-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: Entered genlib library with 15 gates from file "<abc-temp-dir>/stdcells.genlib".
+ABC: + retime -o 
+ABC: + map 
+ABC: Warning: The network was strashed and balanced before mapping.
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+3.20.5.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        4
+ABC RESULTS:              AOI4 cells:        1
+ABC RESULTS:              NAND cells:        7
+ABC RESULTS:               NOT cells:        9
+ABC RESULTS:              OAI3 cells:        1
+ABC RESULTS:              OAI4 cells:        3
+ABC RESULTS:                OR cells:       10
+ABC RESULTS:        internal signals:       62
+ABC RESULTS:           input signals:       36
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+3.20.6. Extracting gate netlist of module `\TopLevel432b' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+3.20.7. Extracting gate netlist of module `\pic27ch' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+3.21. Executing OPT pass (performing simple optimizations).
+
+3.21.1. Executing OPT_EXPR pass (perform const folding).
+
+3.21.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+3.21.3. Executing OPT_RMDFF pass (remove dff with constant values).
+
+3.21.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+  removing unused non-port wire \I1256.
+  removing unused non-port wire \I1b.
+  removing unused non-port wire \I245.
+  removing unused non-port wire \I2b.
+  removing unused non-port wire \I3456.
+  removing unused non-port wire \I3b.
+  removing unused non-port wire \I56.
+  removing unused non-port wire \I5b.
+  removing unused non-port wire \I8b.
+  removing unused non-port wire \Iand.
+  removed 10 unused temporary wires.
+Finding unused cells or wires in module \EncodeChan..
+  removing unused non-port wire \APA.
+  removing unused non-port wire \BPB.
+  removing unused non-port wire \CPC.
+  removed 3 unused temporary wires.
+Finding unused cells or wires in module \PriorityA..
+  removing unused non-port wire \Ab.
+  removing unused non-port wire \EAb.
+  removed 2 unused temporary wires.
+Finding unused cells or wires in module \PriorityB..
+  removing unused non-port wire \Eb.
+  removing unused non-port wire \EbB.
+  removing unused non-port wire \XEB.
+  removed 3 unused temporary wires.
+Finding unused cells or wires in module \PriorityC..
+  removing unused non-port wire \Eb.
+  removing unused non-port wire \EbC.
+  removing unused non-port wire \XEC.
+  removed 3 unused temporary wires.
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+3.21.5. Finished fast OPT passes.
+
+3.22. Executing HIERARCHY pass (managing design hierarchy).
+
+3.22.1. Analyzing design hierarchy..
+Top module:  \pic27ch
+Used module:     \TopLevel432b
+Used module:         \PriorityA
+Used module:         \PriorityB
+Used module:         \PriorityC
+Used module:         \EncodeChan
+Used module:         \DecodeChan
+
+3.22.2. Analyzing design hierarchy..
+Top module:  \pic27ch
+Used module:     \TopLevel432b
+Used module:         \PriorityA
+Used module:         \PriorityB
+Used module:         \PriorityC
+Used module:         \EncodeChan
+Used module:         \DecodeChan
+Removed 0 unused modules.
+
+3.23. Printing statistics.
+
+=== DecodeChan ===
+
+   Number of wires:                 22
+   Number of wire bits:             33
+   Number of public wires:           2
+   Number of public wire bits:      13
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 24
+     $_AND_                         10
+     $_AOI3_                         2
+     $_NAND_                         2
+     $_NOT_                          5
+     $_OAI3_                         3
+     $_OR_                           2
+
+=== EncodeChan ===
+
+   Number of wires:                 53
+   Number of wire bits:             93
+   Number of public wires:           8
+   Number of public wire bits:      48
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 54
+     $_AND_                         18
+     $_NAND_                        18
+     $_OR_                          18
+
+=== PriorityA ===
+
+   Number of wires:                 30
+   Number of wire bits:             54
+   Number of public wires:           4
+   Number of public wire bits:      28
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 36
+     $_AND_                         12
+     $_AOI4_                         2
+     $_NAND_                         1
+     $_NOR_                          2
+     $_NOT_                          9
+     $_OR_                           1
+     $_XOR_                          9
+
+=== PriorityB ===
+
+   Number of wires:                 40
+   Number of wire bits:             72
+   Number of public wires:           5
+   Number of public wire bits:      37
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 45
+     $_AND_                         21
+     $_AOI4_                         2
+     $_NAND_                         1
+     $_NOR_                          2
+     $_NOT_                          9
+     $_OR_                           1
+     $_XOR_                          9
+
+=== PriorityC ===
+
+   Number of wires:                 39
+   Number of wire bits:             71
+   Number of public wires:           5
+   Number of public wire bits:      37
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 35
+     $_AND_                          4
+     $_AOI4_                         1
+     $_NAND_                         7
+     $_NOT_                          9
+     $_OAI3_                         1
+     $_OAI4_                         3
+     $_OR_                          10
+
+=== TopLevel432b ===
+
+   Number of wires:                 11
+   Number of wire bits:             70
+   Number of public wires:          11
+   Number of public wire bits:      70
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     DecodeChan                      1
+     EncodeChan                      1
+     PriorityA                       1
+     PriorityB                       1
+     PriorityC                       1
+
+=== pic27ch ===
+
+   Number of wires:                 51
+   Number of wire bits:             86
+   Number of public wires:          51
+   Number of public wire bits:      86
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  1
+     TopLevel432b                    1
+
+=== design hierarchy ===
+
+   pic27ch                           1
+     TopLevel432b                    1
+       DecodeChan                    1
+       EncodeChan                    1
+       PriorityA                     1
+       PriorityB                     1
+       PriorityC                     1
+
+   Number of wires:                246
+   Number of wire bits:            479
+   Number of public wires:          86
+   Number of public wire bits:     319
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                194
+     $_AND_                         65
+     $_AOI3_                         2
+     $_AOI4_                         5
+     $_NAND_                        29
+     $_NOR_                          4
+     $_NOT_                         32
+     $_OAI3_                         4
+     $_OAI4_                         3
+     $_OR_                          32
+     $_XOR_                         18
+
+3.24. Executing CHECK pass (checking for obvious problems).
+checking module DecodeChan..
+checking module EncodeChan..
+checking module PriorityA..
+checking module PriorityB..
+checking module PriorityC..
+checking module TopLevel432b..
+checking module pic27ch..
+found and reported 0 problems.
+
+4. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFFNEGX1 (noninv, pins=3, area=384.00) is a direct match for cell type $_DFF_N_.
+  cell DFFPOSX1 (noninv, pins=3, area=384.00) is a direct match for cell type $_DFF_P_.
+  cell DFFSR (noninv, pins=5, area=704.00) is a direct match for cell type $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PPN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PNP_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_PPP_ from mapping for $_DFFSR_PNP_.
+  create mapping for $_DFFSR_NNN_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFFSR_NPN_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NNP_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFFSR_NPP_ from mapping for $_DFFSR_NNP_.
+  create mapping for $_DFF_NN0_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFF_NN1_ from mapping for $_DFFSR_NNN_.
+  create mapping for $_DFF_NP0_ from mapping for $_DFFSR_NPP_.
+  create mapping for $_DFF_NP1_ from mapping for $_DFFSR_NPP_.
+  create mapping for $_DFF_PN0_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFF_PN1_ from mapping for $_DFFSR_PNN_.
+  create mapping for $_DFF_PP0_ from mapping for $_DFFSR_PPP_.
+  create mapping for $_DFF_PP1_ from mapping for $_DFFSR_PPP_.
+  final dff cell mappings:
+    DFFNEGX1 _DFF_N_ (.CLK( C), .D( D), .Q( Q));
+    DFFPOSX1 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    DFFSR _DFF_NN0_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S( 1));
+    DFFSR _DFF_NN1_ (.CLK(~C), .D( D), .Q( Q), .R( 1), .S( R));
+    DFFSR _DFF_NP0_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S( 1));
+    DFFSR _DFF_NP1_ (.CLK(~C), .D( D), .Q( Q), .R( 1), .S(~R));
+    DFFSR _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .R( R), .S( 1));
+    DFFSR _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .R( 1), .S( R));
+    DFFSR _DFF_PP0_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S( 1));
+    DFFSR _DFF_PP1_ (.CLK( C), .D( D), .Q( Q), .R( 1), .S(~R));
+    DFFSR _DFFSR_NNN_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S( S));
+    DFFSR _DFFSR_NNP_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S( S));
+    DFFSR _DFFSR_NPN_ (.CLK(~C), .D( D), .Q( Q), .R( R), .S(~S));
+    DFFSR _DFFSR_NPP_ (.CLK(~C), .D( D), .Q( Q), .R(~R), .S(~S));
+    DFFSR _DFFSR_PNN_ (.CLK( C), .D( D), .Q( Q), .R( R), .S( S));
+    DFFSR _DFFSR_PNP_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S( S));
+    DFFSR _DFFSR_PPN_ (.CLK( C), .D( D), .Q( Q), .R( R), .S(~S));
+    DFFSR _DFFSR_PPP_ (.CLK( C), .D( D), .Q( Q), .R(~R), .S(~S));
+Mapping DFF cells in module `\DecodeChan':
+Mapping DFF cells in module `\EncodeChan':
+Mapping DFF cells in module `\PriorityA':
+Mapping DFF cells in module `\PriorityB':
+Mapping DFF cells in module `\PriorityC':
+Mapping DFF cells in module `\TopLevel432b':
+Mapping DFF cells in module `\pic27ch':
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \DecodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \EncodeChan..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityA..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityB..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \PriorityC..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TopLevel432b..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \DecodeChan.
+  Optimizing cells in module \EncodeChan.
+  Optimizing cells in module \PriorityA.
+  Optimizing cells in module \PriorityB.
+  Optimizing cells in module \PriorityC.
+  Optimizing cells in module \TopLevel432b.
+  Optimizing cells in module \pic27ch.
+Performed a total of 0 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\DecodeChan'.
+Finding identical cells in module `\EncodeChan'.
+Finding identical cells in module `\PriorityA'.
+Finding identical cells in module `\PriorityB'.
+Finding identical cells in module `\PriorityC'.
+Finding identical cells in module `\TopLevel432b'.
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+5.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \DecodeChan..
+Finding unused cells or wires in module \EncodeChan..
+Finding unused cells or wires in module \PriorityA..
+Finding unused cells or wires in module \PriorityB..
+Finding unused cells or wires in module \PriorityC..
+Finding unused cells or wires in module \TopLevel432b..
+Finding unused cells or wires in module \pic27ch..
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+
+5.9. Finished OPT passes. (There is nothing left to do.)
+
+6. Executing ABC pass (technology mapping using ABC).
+
+6.1. Extracting gate netlist of module `\DecodeChan' to `<abc-temp-dir>/input.blif'..
+Extracted 24 gates and 33 wires to a netlist network with 9 inputs and 4 outputs.
+
+6.1.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu035/osu035_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu035_stdcells" from "/usr/share/qflow/tech/osu035/osu035_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.01 sec
+ABC: Memory =    0.38 MB. Time =     0.01 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.1.2. Re-integrating ABC results.
+ABC RESULTS:            AND2X2 cells:        1
+ABC RESULTS:           AOI21X1 cells:        2
+ABC RESULTS:             INVX1 cells:        7
+ABC RESULTS:           NAND2X1 cells:        4
+ABC RESULTS:           NAND3X1 cells:        4
+ABC RESULTS:            NOR2X1 cells:        2
+ABC RESULTS:             OR2X2 cells:        1
+ABC RESULTS:        internal signals:       20
+ABC RESULTS:           input signals:        9
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+6.2. Extracting gate netlist of module `\EncodeChan' to `<abc-temp-dir>/input.blif'..
+Extracted 54 gates and 93 wires to a netlist network with 39 inputs and 9 outputs.
+
+6.2.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu035/osu035_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu035_stdcells" from "/usr/share/qflow/tech/osu035/osu035_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.01 sec
+ABC: Memory =    0.38 MB. Time =     0.01 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.2.2. Re-integrating ABC results.
+ABC RESULTS:           AOI22X1 cells:        9
+ABC RESULTS:           NAND2X1 cells:        9
+ABC RESULTS:           NAND3X1 cells:        9
+ABC RESULTS:        internal signals:       45
+ABC RESULTS:           input signals:       39
+ABC RESULTS:          output signals:        9
+Removing temp directory.
+
+6.3. Extracting gate netlist of module `\PriorityA' to `<abc-temp-dir>/input.blif'..
+Extracted 36 gates and 54 wires to a netlist network with 18 inputs and 10 outputs.
+
+6.3.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu035/osu035_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu035_stdcells" from "/usr/share/qflow/tech/osu035/osu035_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.01 sec
+ABC: Memory =    0.38 MB. Time =     0.01 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.3.2. Re-integrating ABC results.
+ABC RESULTS:            AND2X2 cells:        1
+ABC RESULTS:           AOI21X1 cells:        1
+ABC RESULTS:           AOI22X1 cells:        3
+ABC RESULTS:             INVX1 cells:       11
+ABC RESULTS:           NAND2X1 cells:        9
+ABC RESULTS:           NAND3X1 cells:        3
+ABC RESULTS:           OAI21X1 cells:        9
+ABC RESULTS:           OAI22X1 cells:        1
+ABC RESULTS:        internal signals:       26
+ABC RESULTS:           input signals:       18
+ABC RESULTS:          output signals:       10
+Removing temp directory.
+
+6.4. Extracting gate netlist of module `\PriorityB' to `<abc-temp-dir>/input.blif'..
+Extracted 45 gates and 72 wires to a netlist network with 27 inputs and 10 outputs.
+
+6.4.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu035/osu035_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu035_stdcells" from "/usr/share/qflow/tech/osu035/osu035_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.01 sec
+ABC: Memory =    0.38 MB. Time =     0.01 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.4.2. Re-integrating ABC results.
+ABC RESULTS:            AND2X2 cells:        7
+ABC RESULTS:           AOI22X1 cells:        3
+ABC RESULTS:             INVX1 cells:        9
+ABC RESULTS:           NAND2X1 cells:        8
+ABC RESULTS:           NAND3X1 cells:        5
+ABC RESULTS:            NOR2X1 cells:        2
+ABC RESULTS:           OAI21X1 cells:        9
+ABC RESULTS:        internal signals:       35
+ABC RESULTS:           input signals:       27
+ABC RESULTS:          output signals:       10
+Removing temp directory.
+
+6.5. Extracting gate netlist of module `\PriorityC' to `<abc-temp-dir>/input.blif'..
+Extracted 35 gates and 71 wires to a netlist network with 36 inputs and 1 outputs.
+
+6.5.1. Executing ABC.
+Running ABC command: /usr/lib/qflow/bin/yosys-abc -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /usr/share/qflow/tech/osu035/osu035_stdcells.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.00 sec
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFNEGX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFPOSX1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFSR".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "LATCH".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "PADINOUT".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUFX2".
+ABC: Scl_LibertyReadGenlib() skipped cell "PADFC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADNC" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADVDD" without logic function.
+ABC: Scl_LibertyReadGenlib() skipped cell "PADGND" without logic function.
+ABC: Library "osu035_stdcells" from "/usr/share/qflow/tech/osu035/osu035_stdcells.lib" has 28 cells (11 skipped: 4 seq; 3 tri-state; 4 no func).  Time =     0.01 sec
+ABC: Memory =    0.38 MB. Time =     0.01 sec
+ABC: Warning: Detected 2 multi-output gates (for example, "FAX1").
+ABC: + strash 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + ifraig 
+ABC: + retime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + map -M 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+6.5.2. Re-integrating ABC results.
+ABC RESULTS:            AND2X2 cells:        3
+ABC RESULTS:           AOI21X1 cells:        1
+ABC RESULTS:           AOI22X1 cells:        1
+ABC RESULTS:             INVX1 cells:        7
+ABC RESULTS:           NAND2X1 cells:        8
+ABC RESULTS:           NAND3X1 cells:        3
+ABC RESULTS:            NOR2X1 cells:        4
+ABC RESULTS:           OAI22X1 cells:        3
+ABC RESULTS:        internal signals:       34
+ABC RESULTS:           input signals:       36
+ABC RESULTS:          output signals:        1
+Removing temp directory.
+
+6.6. Extracting gate netlist of module `\TopLevel432b' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+6.7. Extracting gate netlist of module `\pic27ch' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+7. Executing FLATTEN pass (flatten design).
+Mapping pic27ch.Ckt432 using TopLevel432b.
+Mapping pic27ch.Ckt432.M1 using PriorityA.
+Mapping pic27ch.Ckt432.M2 using PriorityB.
+Mapping pic27ch.Ckt432.M3 using PriorityC.
+Mapping pic27ch.Ckt432.M4 using EncodeChan.
+Mapping pic27ch.Ckt432.M5 using DecodeChan.
+No more expansions possible.
+Deleting now unused module DecodeChan.
+Deleting now unused module EncodeChan.
+Deleting now unused module PriorityA.
+Deleting now unused module PriorityB.
+Deleting now unused module PriorityC.
+Deleting now unused module TopLevel432b.
+Removed 0 unused cells and 363 unused wires.
+
+8. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+Don't map input port pic27ch.in1: Missing option -inpad.
+Don't map input port pic27ch.in102: Missing option -inpad.
+Don't map input port pic27ch.in105: Missing option -inpad.
+Don't map input port pic27ch.in108: Missing option -inpad.
+Don't map input port pic27ch.in11: Missing option -inpad.
+Don't map input port pic27ch.in112: Missing option -inpad.
+Don't map input port pic27ch.in115: Missing option -inpad.
+Don't map input port pic27ch.in14: Missing option -inpad.
+Don't map input port pic27ch.in17: Missing option -inpad.
+Don't map input port pic27ch.in21: Missing option -inpad.
+Don't map input port pic27ch.in24: Missing option -inpad.
+Don't map input port pic27ch.in27: Missing option -inpad.
+Don't map input port pic27ch.in30: Missing option -inpad.
+Don't map input port pic27ch.in34: Missing option -inpad.
+Don't map input port pic27ch.in37: Missing option -inpad.
+Don't map input port pic27ch.in4: Missing option -inpad.
+Don't map input port pic27ch.in40: Missing option -inpad.
+Don't map input port pic27ch.in43: Missing option -inpad.
+Don't map input port pic27ch.in47: Missing option -inpad.
+Don't map input port pic27ch.in50: Missing option -inpad.
+Don't map input port pic27ch.in53: Missing option -inpad.
+Don't map input port pic27ch.in56: Missing option -inpad.
+Don't map input port pic27ch.in60: Missing option -inpad.
+Don't map input port pic27ch.in63: Missing option -inpad.
+Don't map input port pic27ch.in66: Missing option -inpad.
+Don't map input port pic27ch.in69: Missing option -inpad.
+Don't map input port pic27ch.in73: Missing option -inpad.
+Don't map input port pic27ch.in76: Missing option -inpad.
+Don't map input port pic27ch.in79: Missing option -inpad.
+Don't map input port pic27ch.in8: Missing option -inpad.
+Don't map input port pic27ch.in82: Missing option -inpad.
+Don't map input port pic27ch.in86: Missing option -inpad.
+Don't map input port pic27ch.in89: Missing option -inpad.
+Don't map input port pic27ch.in92: Missing option -inpad.
+Don't map input port pic27ch.in95: Missing option -inpad.
+Don't map input port pic27ch.in99: Missing option -inpad.
+Mapping port pic27ch.out223 using BUFX2.
+Mapping port pic27ch.out329 using BUFX2.
+Mapping port pic27ch.out370 using BUFX2.
+Mapping port pic27ch.out421 using BUFX2.
+Mapping port pic27ch.out430 using BUFX2.
+Mapping port pic27ch.out431 using BUFX2.
+Mapping port pic27ch.out432 using BUFX2.
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \pic27ch..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \pic27ch.
+Performed a total of 0 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\pic27ch'.
+Removed a total of 0 cells.
+
+9.6. Executing OPT_RMDFF pass (remove dff with constant values).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \pic27ch..
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+
+9.9. Finished OPT passes. (There is nothing left to do.)
+
+10. Executing BLIF backend.
+
+End of script. Logfile hash: 6d2ee945d3
+CPU: user 0.66s system 0.02s, MEM: 38.93 MB total, 10.02 MB resident
+Yosys 0.7 (git sha1 61f6811, gcc 6.2.0-11ubuntu1 -O2 -fdebug-prefix-map=/build/yosys-OIL3SR/yosys-0.7=. -fstack-protector-strong -fPIC -Os)
+Time spent: 20% 16x opt_expr (0 sec), 14% 15x opt_clean (0 sec), ...
+Cleaning up output syntax
+Cleaning Up blif file syntax
+Running blifFanout (iterative)
+
+Parsing library "osu035_stdcells"
+End of library at line 6636
+Lib Read:  Processed 6637 lines.
+Top internal fanout is 10 (load 280.755) from node _0_,
+driven by NAND3X1 with strength 101.345 (fF driven at latency 200)
+Top fanout load-to-strength ratio is 2.77029 (latency = 554.059 ps)
+Top input node fanout is 5 (load 107.091) from node in108.
+Warning 1: load of 286.217 is 2.82418 times greater than strongest gate NAND3X1
+This warning will only be repeated for larger overload ratios.  Warning count reflects
+the total number of overloaded nets.
+Warning 4: load of 290.755 is 2.86897 times greater than strongest gate NAND3X1
+7 gates exceed specified minimum load.
+0 buffers were added.
+0 gates were changed.
+
+Gate counts by drive strength:
+
+	"1" gates	In: 146    	Out: 146    	+0
+	"2" gates	In: 20    	Out: 20    	+0
+
+gates resized: 0
+
+Generating RTL verilog and SPICE netlist file in directory
+	 /home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis
+Files:
+   Verilog: /home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis/pic27ch.rtl.v
+   Verilog: /home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis/pic27ch.rtlnopwr.v
+   Spice:   /home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis/pic27ch.spc
+
+Running blif2Verilog.
+Running blif2BSpice.
+Running spi2xspice.py
+Synthesis script ended on Thu Jul 26 23:34:39 EET 2018
+Running blif2cel.tcl
+Loaded LEF file (/usr/share/qflow/tech/osu035/osu035_stdcells.lef) for reading...
+Loaded BLIF file (/home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis/pic27ch.blif) for reading ...
+Loaded CEL file (/home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/layout/pic27ch.cel) for writing...
+1st pass of blif file /home/naufal/Documents/auc/ravacancy/tdp_app/hello_world/input_files/simple/pic27ch/synthesis/pic27ch.blif. . .
+Reading macros from LEF file. . .
+Parsing macro AND2X2:  Ports are:
+parse_pin
+macroname: AND2X2, pinname: A
+Port type: INPUT 
+A -240 -261 1
+parse_pin
+macroname: AND2X2, pinname: B
+Port type: INPUT 
+B -80 -100 1
+parse_pin
+macroname: AND2X2, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: AND2X2, pinname: Y
+Port type: OUTPUT 
+Y 179 -680 1
+parse_pin
+macroname: AND2X2, pinname: vdd
+Port type: INOUT 
+vdd 80 590 1
+Parsing macro AOI21X1:  Ports are:
+parse_pin
+macroname: AOI21X1, pinname: A
+Port type: INPUT 
+A -160 -70 1
+parse_pin
+macroname: AOI21X1, pinname: B
+Port type: INPUT 
+B -80 -261 1
+parse_pin
+macroname: AOI21X1, pinname: C
+Port type: INPUT 
+C 240 -501 1
+parse_pin
+macroname: AOI21X1, pinname: gnd
+Port type: INOUT 
+gnd 240 -870 1
+parse_pin
+macroname: AOI21X1, pinname: Y
+Port type: OUTPUT 
+Y 80 -680 1
+parse_pin
+macroname: AOI21X1, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+Parsing macro AOI22X1:  Ports are:
+parse_pin
+macroname: AOI22X1, pinname: A
+Port type: INPUT 
+A -240 -70 1
+parse_pin
+macroname: AOI22X1, pinname: B
+Port type: INPUT 
+B -160 -261 1
+parse_pin
+macroname: AOI22X1, pinname: C
+Port type: INPUT 
+C 320 -61 1
+parse_pin
+macroname: AOI22X1, pinname: D
+Port type: INPUT 
+D 140 -180 1
+parse_pin
+macroname: AOI22X1, pinname: gnd
+Port type: INOUT 
+gnd 320 -770 1
+parse_pin
+macroname: AOI22X1, pinname: Y
+Port type: OUTPUT 
+Y 10 -431 1
+parse_pin
+macroname: AOI22X1, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+Parsing macro BUFX2:  Ports are:
+parse_pin
+macroname: BUFX2, pinname: A
+Port type: INPUT 
+A -160 -140 1
+parse_pin
+macroname: BUFX2, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: BUFX2, pinname: Y
+Port type: OUTPUT 
+Y 170 0 1
+parse_pin
+macroname: BUFX2, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+Parsing macro INVX1:  Ports are:
+parse_pin
+macroname: INVX1, pinname: A
+Port type: INPUT 
+A -80 -540 1
+parse_pin
+macroname: INVX1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: INVX1, pinname: Y
+Port type: OUTPUT 
+Y 80 0 1
+parse_pin
+macroname: INVX1, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+Parsing macro NAND2X1:  Ports are:
+parse_pin
+macroname: NAND2X1, pinname: A
+Port type: INPUT 
+A -160 -340 1
+parse_pin
+macroname: NAND2X1, pinname: B
+Port type: INPUT 
+B 160 140 1
+parse_pin
+macroname: NAND2X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: NAND2X1, pinname: Y
+Port type: OUTPUT 
+Y 100 -680 1
+parse_pin
+macroname: NAND2X1, pinname: vdd
+Port type: INOUT 
+vdd 160 770 1
+Parsing macro NAND3X1:  Ports are:
+parse_pin
+macroname: NAND3X1, pinname: A
+Port type: INPUT 
+A -240 60 1
+parse_pin
+macroname: NAND3X1, pinname: B
+Port type: INPUT 
+B -40 -100 1
+parse_pin
+macroname: NAND3X1, pinname: C
+Port type: INPUT 
+C 80 260 1
+parse_pin
+macroname: NAND3X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: NAND3X1, pinname: Y
+Port type: OUTPUT 
+Y -80 680 1
+parse_pin
+macroname: NAND3X1, pinname: vdd
+Port type: INOUT 
+vdd 80 790 1
+Parsing macro NOR2X1:  Ports are:
+parse_pin
+macroname: NOR2X1, pinname: A
+Port type: INPUT 
+A -160 -540 1
+parse_pin
+macroname: NOR2X1, pinname: B
+Port type: INPUT 
+B 160 -61 1
+parse_pin
+macroname: NOR2X1, pinname: gnd
+Port type: INOUT 
+gnd 160 -870 1
+parse_pin
+macroname: NOR2X1, pinname: Y
+Port type: OUTPUT 
+Y 0 -300 1
+parse_pin
+macroname: NOR2X1, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+Parsing macro OAI21X1:  Ports are:
+parse_pin
+macroname: OAI21X1, pinname: A
+Port type: INPUT 
+A -160 -330 1
+parse_pin
+macroname: OAI21X1, pinname: B
+Port type: INPUT 
+B -80 -140 1
+parse_pin
+macroname: OAI21X1, pinname: C
+Port type: INPUT 
+C 160 300 1
+parse_pin
+macroname: OAI21X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: OAI21X1, pinname: Y
+Port type: OUTPUT 
+Y 50 -100 1
+parse_pin
+macroname: OAI21X1, pinname: vdd
+Port type: INOUT 
+vdd 179 770 1
+Parsing macro OAI22X1:  Ports are:
+parse_pin
+macroname: OAI22X1, pinname: A
+Port type: INPUT 
+A -240 -330 1
+parse_pin
+macroname: OAI22X1, pinname: B
+Port type: INPUT 
+B -160 -140 1
+parse_pin
+macroname: OAI22X1, pinname: C
+Port type: INPUT 
+C 320 -261 1
+parse_pin
+macroname: OAI22X1, pinname: D
+Port type: INPUT 
+D 160 -140 1
+parse_pin
+macroname: OAI22X1, pinname: gnd
+Port type: INOUT 
+gnd 0 -1000 1
+parse_pin
+macroname: OAI22X1, pinname: Y
+Port type: OUTPUT 
+Y 0 -300 1
+parse_pin
+macroname: OAI22X1, pinname: vdd
+Port type: INOUT 
+vdd 320 570 1
+Parsing macro OR2X2:  Ports are:
+parse_pin
+macroname: OR2X2, pinname: A
+Port type: INPUT 
+A -240 -540 1
+parse_pin
+macroname: OR2X2, pinname: B
+Port type: INPUT 
+B -40 -221 1
+parse_pin
+macroname: OR2X2, pinname: gnd
+Port type: INOUT 
+gnd 80 -790 1
+parse_pin
+macroname: OR2X2, pinname: Y
+Port type: OUTPUT 
+Y 240 -100 1
+parse_pin
+macroname: OR2X2, pinname: vdd
+Port type: INOUT 
+vdd 0 999 1
+2nd pass of blif file. . .
+3rd pass of blif file. . .
+Done!
+No pic27ch.cel2 file found for project. . . continuing without pin placement hints
+Running GrayWolf placement
+
+twflow version:2.1 date:Mon May 25 21:15:08 EDT 1992
+Authors: Bill Swartz, Carl Sechen
+         Yale University
+
+syntax version:v1.1 date:Mon May 25 21:11:10 EDT 1992
+TimberWolf System Syntax Checker
+Authors: Carl Sechen, Kai-Win Lee, Bill Swartz,
+         Dahe Chen, and Jimmy Lam
+         Yale University
+
+Read   50 objects so far...
+Read  100 objects so far...
+Read  150 objects so far...
+Read  200 objects so far...
+No syntax errors were found
+
+syntax terminated normally with no errors and 0 warning[s]
+
+
+----------------------------
+Total stdcells     :166
+Total cell width   :9.01e+04
+Total cell height  :3.32e+05
+Total cell area    :1.80e+08
+Total core area    :1.80e+08
+Average cell height:2.00e+03
+
+
+nocut - replacement for Mincut version:v1.0 date:Mon May 25 21:09:40 EDT 1992
+TimberWolf System Floorplan Setup Program
+Authors: Carl Sechen, Bill Swartz,
+         Yale University
+
+Read   50 objects so far...
+Read  100 objects so far...
+Read  150 objects so far...
+Read  200 objects so far...
+Splitting pic27ch.cel into pic27ch.scel and pic27ch.mcel...
+	done!
+
+
+nocut - replacement for Mincut terminated normally with no errors and 0 warning[s]
+
+
+TimberWolfMC version:v2.2 date:Mon May 25 21:18:34 EDT 1992
+Authors: Carl Sechen, Bill Swartz, Kai-Win Lee
+         Dahe Chen, and Jimmy Lam
+         Yale University
+
+config version:v1.0 date:Mon May 25 20:57:18 EDT 1992
+Row configuration program
+    Yale University
+
+
+config switches:
+	Graphics mode on
+	config will inherit window
+
+
+Note: restore state file exists:pic27ch
+
+
+config terminated normally with no errors and 0 warning[s]
+
+
+TimberWolfMC terminated normally with no errors and 0 warning[s]
+
+ERROR[check_pin]:the pin <in82> assigned to cell <twpin_in82> is
+outside the cell's bounding box:
+	cell l:-100 r:100 b:-2147483568 t:2147483568  pin x:0 y:-2147483648
+
+
+TimberWolfSC switches:
+	Graphics mode on
+	TimberWolfSC will inherit window
+
+TimberWolfSC version:v6.0 date:Mon May 25 21:19:07 EDT 1992
+Row-Based Placement and Global Routing Program
+Authors: Carl Sechen, Kai-Win Lee, and Bill Swartz,
+         Yale University
+
+TimberWolfSC terminated abnormally with 1 error[s] and 0 warning[s]
+
+
+twflow terminated abnormally with 1 error[s] and 0 warning[s]
+
+Running getfillcell.tcl
+Using cell FILL for fill
+Running place2def.tcl
+Error: can't open file pic27ch.pl1 for input
+place2def failure:  No file pic27ch.def.
+Premature exit.
+Synthesis flow stopped due to error condition.
