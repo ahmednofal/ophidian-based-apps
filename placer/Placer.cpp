@@ -11,7 +11,8 @@ Placer::Placer(Design & design) :
     mDesignFloorplan(design.floorplan()),
     mDesignPlacementMapping(design.placementMapping()),
     mDesignPlacement(design.placement()),
-    mFstSite(mDesignFloorplan.site(*mDesignFloorplan.rowsRange().begin())),
+    //mFstSite(mDesignFloorplan.site(*mDesignFloorplan.rowsRange().begin())),
+    mFstSite(mDesignFloorplan.find("core")),
     mSiteWidth(this->siteWidth(mFstSite)),
     mSiteHeight(this->siteHeight(mFstSite))
 {
@@ -142,11 +143,12 @@ void Placer::basicPlace(ConstRowIterator & rowIter,  float & rowX,  float & rowY
 
 void Placer::goToNextRow(ConstRowIterator & rowIter, float & rowX,  float & rowY,int & sitesInRow,  int & filledSitesInRow)
 {
-            rowIter++;
-            rowX = (float) mDesignFloorplan.origin(*rowIter).x();
-            rowY = (float) mDesignFloorplan.origin(*rowIter).y();
-            sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
-            filledSitesInRow = 0;
+    rowIter++;
+    rowX = (float) mDesignFloorplan.origin(*rowIter).x();
+    rowY = (float) mDesignFloorplan.origin(*rowIter).y();
+    std::cout << "rowY " << rowY << endl << std::flush;
+    sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
+    filledSitesInRow = 0;
 }
 
 
