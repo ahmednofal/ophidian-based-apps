@@ -18,4 +18,18 @@ namespace cellUtil{
 
     ophidian::geometry::Box  cellDim(const Cell &,ophidian::circuit::LibraryMapping &, ophidian::placement::Library &);
 };
+
+namespace floorplanUtil {
+    using Design = ophidian::design::Design;
+    using Point = ophidian::util::LocationDbu;
+    using Cell = ophidian::circuit::Cell;
+    using Floorplan = ophidian::floorplan::Floorplan;
+    
+    Point chipDiemnsions(Design & design);
+    float chipHeight(Design & design);
+    float chipWidth(Design & design);
+    float siteWidth(Design & design);
+    float siteHeight(Design & design);
+    float cellsArea(Design & design);
+}
 #endif
