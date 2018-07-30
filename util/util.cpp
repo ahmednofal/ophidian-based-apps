@@ -56,3 +56,21 @@ float floorplanUtil::cellsArea(Design & design)
     return area;
 }
 
+
+float floorplanUtil::siteWidth(Design & design, Site & site)
+{
+    return (float) floorplanUtil::siteDimensions(design, site).x();
+}
+
+
+float floorplanUtil::siteHeight(Design & design, Site & site)
+{
+    return (float) floorplanUtil::siteDimensions(design, site).y();
+}
+
+
+floorplanUtil::Point floorplanUtil::siteDimensions(Design & design, Site & site)
+{
+    Floorplan & floorplan = design.floorplan();
+    return floorplan.siteUpperRightCorner(site);
+}
