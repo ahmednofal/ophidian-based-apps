@@ -22,16 +22,16 @@ class WireLength
     using Pins = ophidian::entity_system::Association <Net, Pin>::Parts;
     using Point = ophidian::geometry::Point;
 
-    private:
-        Design & design;
-        Netlist & netlist;
-        bool isIO(Pin&);
-        std::vector<Point> pinsPositions(Pins&);
-        
-    public:
-        WireLength(ophidian::design::Design & design);
-        ~WireLength();
-        double estimate();
+private:
+    Design & design;
+    Netlist & netlist;
+    bool isIO(Pin&);
+    std::vector<Point> pinsPositions(Pins&);
+    
+public:
+    WireLength(ophidian::design::Design & design);
+    ~WireLength();
+    double estimate();
 
 };
 
