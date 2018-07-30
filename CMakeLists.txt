@@ -64,21 +64,22 @@ add_subdirectory(util)
 # our placer subdirectory
 add_subdirectory(placer)
 
-add_executable(hello_world
+add_executable(main
     main.cpp
 )
 
-add_executable(placer_test
+add_executable(tester
     test.cpp
 )
 
-target_link_libraries(placer_test
+target_link_libraries(tester
     PUBLIC ophidian::ophidian_design
     PUBLIC ophidian::ophidian_interconnection
     myPlacer
 )
 
-target_link_libraries(hello_world
+target_link_libraries(main
     PUBLIC ophidian::ophidian_design
+    myPlacer
     util
 )
