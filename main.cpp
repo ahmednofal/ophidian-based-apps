@@ -23,7 +23,9 @@
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/placement/Library.h>
 #include <ophidian/standard_cell/StandardCells.h>
+#include "placer/Floorplanner.h"
 #include "util/util.h"
+
 
 std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
 bool isInput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
@@ -155,7 +157,17 @@ int main(int argc, char** argv)
 
 //    rowSites(myDesign);
 //    printRows(myDesign);
+    Floorplanner floorplanner(myDesign);
+    floorplanner.setUtilization(0.8);
+    floorplanner.setFloorplanRatio(1.0);
+    floorplanner.create();
+    
+    printRows(myDesign);
     printf("total cellSites %d\n", totalCellSites(myDesign));
+//    the_netlist.add(ophidian::circuit::Cell(), "hello");
+//    the_netlist.add(ophidian::circuit::Pin(), "you");
+//    the_floorplan.add(ophidian::floorplan::Site(), "eeee", ophidian::util::LocationDbu(10.0, 10.0));
+//    the_floorplan.add(ophidian::floorplan::Row(), ophidian::util::LocationDbu(40.0, 0.0), 20, the_floorplan.find("core"));
     return 0;
 }
 
