@@ -1,8 +1,8 @@
 #include "placer/WireLength.h"
 
 WireLength::WireLength(ophidian::design::Design & design) :
-    design(design),
-    netlist(design.netlist())
+    mDesign(design),
+    mNetlist(design.netlist())
 {
 }
 
@@ -11,8 +11,8 @@ double WireLength::estimate()
     double total = 0;
     auto & treeCreator = Flute::instance();
 
-    for (auto netIter = netlist.begin(Net()); netIter != netlist.end(Net()); netIter++) {
-        auto pins = netlist.pins(*netIter);
+    for (auto netIter = mNetlist.begin(Net()); netIter != mNetlist.end(Net()); netIter++) {
+        auto pins = mNetlist.pins(*netIter);
         auto locations = pinsPositions(pins);
         auto tree = treeCreator.create<std::vector<Point>>(locations);                      // maybe save them for later use
         total += tree->length();
@@ -27,17 +27,17 @@ bool WireLength::isIO(Pin & pin)
     using Input = ophidian::circuit::Input;
     using Output = ophidian::circuit::Output;
 
-    return !(netlist.input(pin) == Input() && netlist.output(pin) == Output());
+    return !(mNetlist.input(pin) == Input() && mNetlist.output(pin) == Output());
 }
 
 
 std::vector<WireLength::Point> WireLength::pinsPositions(Pins & pins)
 {
-    auto placement = design.placement();
+    auto placement = mDesign.placement();
     std::vector<WireLength::Point> positions;
     for (auto pin : pins) {
         if (!isIO(pin)) {
-            auto cell = netlist.cell(pin);
+            auto cell = mNetlist.cell(pin);
             auto cellPosition = placement.cellLocation(cell);
             auto point = Point((double) cellPosition.x(), (double) cellPosition.y());
             positions.push_back(point);

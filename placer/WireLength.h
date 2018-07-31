@@ -23,8 +23,8 @@ class WireLength
     using Point = ophidian::geometry::Point;
 
 private:
-    Design & design;
-    Netlist & netlist;
+    Design & mDesign;
+    Netlist & mNetlist;
     bool isIO(Pin&);
     std::vector<Point> pinsPositions(Pins&);
     
