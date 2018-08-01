@@ -79,6 +79,9 @@ target_link_libraries(tester
 
 target_link_libraries(main
     PUBLIC ophidian::ophidian_design
+<<<<<<< HEAD
     myPlacer
     util
+=======
+>>>>>>> parent of 3c26102... misc
 )

@@ -38,12 +38,19 @@ int main(int argc, char** argv)
     auto & myDesign = builder.build();
     
     Placer placer(myDesign);
+<<<<<<< HEAD
     printf("WireLength: %.2f\n", WireLength.estimate());
     //    placer.printLocations();
     placer.place();
     printf("After placing\n");
     printf("WireLength: %.2f\n", WireLength.estimate());
     //    placer.printLocations();
+=======
+    placer.printLocations();
+    placer.place();
+    printf("After placing\n");
+    placer.printLocations();
+>>>>>>> parent of 3c26102... misc
 
     return 0;
 } 
