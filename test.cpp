@@ -6,6 +6,7 @@
 #include <ophidian/placement/Library.h>
 #include <ophidian/standard_cell/StandardCells.h>
 #include "placer/Placer.h"
+#include "placer/WireLength.h"
 
 std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
 bool isInput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
@@ -37,10 +38,10 @@ int main(int argc, char** argv)
 
     auto & myDesign = builder.build();
     
-    WireLength wireLength(mDesign);
-    Placer placer(myDesign);
+    WireLength wireLength(myDesign);
+    //Placer placer(myDesign);
     printf("WireLength: %.2f\n", wireLength.estimate());
-    placer.place();
+    //placer.place();
     printf("After placing\n");
     printf("WireLength: %.2f\n", wireLength.estimate());
 
