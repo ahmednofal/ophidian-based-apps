@@ -23,32 +23,11 @@
 #include <ophidian/circuit/LibraryMapping.h>
 #include <ophidian/placement/Library.h>
 #include <ophidian/standard_cell/StandardCells.h>
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include "util/util.h"
-=======
-#include "placer/Floorplanner.h"
-#include "util/util.h"
-
->>>>>>> c16b5dd9a4526b6658f356dfc175862a6e9f6a3b
-=======
->>>>>>> parent of 3c26102... misc
 
 std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
 bool isInput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
 bool isOutput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
-<<<<<<< HEAD
-void rowSites(ophidian::design::Design & design);
-void printSites(ophidian::design::Design & design);
-void printRows(ophidian::design::Design & design);
-int totalCellSites(ophidian::design::Design & design);
-<<<<<<< HEAD
-=======
-void testCellDims(ophidian::design::Design & design);
->>>>>>> c16b5dd9a4526b6658f356dfc175862a6e9f6a3b
-=======
->>>>>>> parent of 3c26102... misc
-
 int main(int argc, char** argv)
 {
     using std::cout;
@@ -166,24 +145,7 @@ int main(int argc, char** argv)
         printf("\t site: %s size: %.3f %.3f\n", name.c_str(), (double) position.x(), (double) position.y());
     }
 
-<<<<<<< HEAD
-//    rowSites(myDesign);
-//    printRows(myDesign);
-<<<<<<< HEAD
-    printf("total cellSites %d\n", totalCellSites(myDesign));
-=======
-//    Floorplanner floorplanner(myDesign);
-//    floorplanner.setUtilization(0.8);
-//    floorplanner.setFloorplanRatio(1.0);
-//    floorplanner.create();
-//    
-//    printRows(myDesign);
-//    printf("total cellSites %d\n", totalCellSites(myDesign));
-    testCellDims(myDesign);
->>>>>>> c16b5dd9a4526b6658f356dfc175862a6e9f6a3b
-=======
->>>>>>> parent of 3c26102... misc
-    return 0;
+   return 0;
 }
 
 
@@ -232,111 +194,4 @@ bool isOutput(ophidian::circuit::Netlist & netlist, ophidian::circuit::Pin & pin
     }
     return false;
 }
-<<<<<<< HEAD
 
-
-// useless for now
-void rowSites(ophidian::design::Design & design)
-{
-    auto & placement = design.placement();
-    auto & netlist = design.netlist();
-    
-    auto cellIter = netlist.begin(ophidian::circuit::Cell());
-
-    int rowNumber = 0;
-    double sites = 0;
-    double width = 0;
-    double siteWidth = 160;
-    double rowPosition = (double) placement.cellLocation(*cellIter).y();
-    width += cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library());
-    cellIter++;
-
-    while (cellIter != netlist.end(ophidian::circuit::Cell()))
-    {
-        width += cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library());
-        double newRowPosition = (double) placement.cellLocation(*cellIter).y();
-        if (newRowPosition != rowPosition) {
-            rowPosition = newRowPosition;
-            sites = ceil((double)placement.cellLocation(*cellIter).x() + cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library()) / siteWidth);
-            printf("Row %d sites %.2f width %.2f\n", rowNumber, sites, width);
-            rowNumber++;
-            width = 0;
-        }
-        cellIter++;
-    }
-}
-
-
-int totalCellSites(ophidian::design::Design & design)
-{
-    int cellSites = 0;
-    auto & netlist = design.netlist();
-<<<<<<< HEAD
-
-    for (auto cellIter = netlist.begin(ophidian::circuit::Cell()); cellIter != netlist.end(ophidian::circuit::Cell()); cellIter++)
-        cellSites += ceil(cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library()) / 160);
-=======
-    auto site = design.floorplan().find("core");
-    float siteWidth = floorplanUtil::siteWidth(design, site);
-
-    for (auto cellIter = netlist.begin(ophidian::circuit::Cell()); cellIter != netlist.end(ophidian::circuit::Cell()); cellIter++) {
-        float cellWidth = cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library());
-        float sites = cellWidth / siteWidth;
-        printf("cell: %s cellWidth %.3f siteWidth %.3f sites %.3f\n", netlist.name(*cellIter).c_str(), cellWidth, siteWidth, sites);
-        cellSites += int(cellUtil::cellWidth(*cellIter, design.libraryMapping(), design.library()) / siteWidth);
-    }
->>>>>>> c16b5dd9a4526b6658f356dfc175862a6e9f6a3b
-
-    return cellSites;
-}
-
-
-void printSites(ophidian::design::Design & design)
-{
-    printf("===================\nSITES\n===================\n");
-    using string = std::string;
-    auto floorplan = design.floorplan();
-
-    for (auto siteIter = floorplan.sitesRange().begin(); siteIter != floorplan.sitesRange().end(); siteIter++) {
-        auto site = *siteIter;
-        string siteName = floorplan.name(site);
-        double width = (double) floorplan.siteUpperRightCorner(site).x();
-        double height = (double) floorplan.siteUpperRightCorner(site).y();
-        printf("site %s %.2f x %.2f\n", siteName.c_str(), width, height);
-    }
-}
-
-
-void printRows(ophidian::design::Design & design)
-{
-    auto floorplan = design.floorplan();
-
-    int n = 0;
-    for (auto rowIter = floorplan.rowsRange().begin(); rowIter != floorplan.rowsRange().end(); rowIter++) {
-        auto row = *rowIter;
-        double row_y = (double) floorplan.origin(row).y();
-        double row_x = (double) floorplan.origin(row).x();
-        int no_of_sites = floorplan.numberOfSites(row);
-
-        printf("row %d contains %d sites @ (%.2f, %.2f)\n", n, no_of_sites, row_x, row_y);
-        n++;
-    }
-}
-<<<<<<< HEAD
-=======
-
-
-void testCellDims(ophidian::design::Design & design)
-{
-    auto & stdCells = design.standardCells();
-    auto & library = design.library();
-    auto cell = stdCells.find(ophidian::standard_cell::Cell(), "DFFSR");
-    auto multiBox = library.geometry(cell);
-
-    for (auto box = multiBox.begin(); box != multiBox.end(); box++) {
-        std::cout << box->min_corner().x() / 1000 << " " << box->max_corner().x() / 1000 << std::endl;
-    }
-}
->>>>>>> c16b5dd9a4526b6658f356dfc175862a6e9f6a3b
-=======
->>>>>>> parent of 3c26102... misc
