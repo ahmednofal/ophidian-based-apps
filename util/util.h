@@ -5,7 +5,6 @@
 #include <ophidian/circuit/Netlist.h>
 #include <ophidian/geometry/Models.h>
 #include <ophidian/placement/Library.h>
-#include <string>
 #include <cstdlib>
 namespace cellUtil{
     using Design=ophidian::design::Design;
@@ -25,15 +24,17 @@ namespace floorplanUtil {
     using Point = ophidian::util::LocationDbu;
     using Cell = ophidian::circuit::Cell;
     using Floorplan = ophidian::floorplan::Floorplan;
+<<<<<<< HEAD
    using string = std::string;
     using Site = ophidian::floorplan::Site;
+=======
+>>>>>>> parent of 44a9f99... more floorplanner utils
     
     Point chipDiemnsions(Design & design);
-    Point siteDimensions(Design & design, Site & site);
     float chipHeight(Design & design);
     float chipWidth(Design & design);
-    float siteWidth(Design & design, Site & site);
-    float siteHeight(Design & design, Site & site);
+    float siteWidth(Design & design);
+    float siteHeight(Design & design);
     float cellsArea(Design & design);
 }
 #endif
