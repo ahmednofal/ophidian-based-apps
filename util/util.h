@@ -18,6 +18,7 @@ namespace cellUtil{
 
     ophidian::geometry::Box  cellDim(const Cell &,ophidian::circuit::LibraryMapping &, ophidian::placement::Library &);
 };
+<<<<<<< HEAD
 
 namespace floorplanUtil {
     using Design = ophidian::design::Design;
@@ -37,4 +38,6 @@ namespace floorplanUtil {
     float siteHeight(Design & design);
     float cellsArea(Design & design);
 }
+=======
+>>>>>>> parent of 2b922f2... some utils for floorplan
 #endif
