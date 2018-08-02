@@ -146,7 +146,7 @@ void Placer::goToNextRow(ConstRowIterator & rowIter, float & rowX,  float & rowY
     rowIter++;
     rowX = (float) mDesignFloorplan.origin(*rowIter).x();
     rowY = (float) mDesignFloorplan.origin(*rowIter).y();
-    std::cout << "rowY " << rowY << endl << std::flush;
+    // std::cout << "rowY " << rowY << endl << std::flush;
     sitesInRow = mDesignFloorplan.numberOfSites(*rowIter);
     filledSitesInRow = 0;
 }

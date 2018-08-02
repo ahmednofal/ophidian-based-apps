@@ -41,17 +41,19 @@ int main(int argc, char** argv)
     ophidian::design::ICCAD2015ContestDesignBuilder builder{lef, def, verilog};
 
     auto & myDesign = builder.build();
+    WireLength wireLength(myDesign);
     Floorplanner floorplanner(myDesign);
     floorplanner.setUtilization(1.0);
     floorplanner.setFloorplanRatio(2.0);
     floorplanner.create();
     std::cout << cellsSite(myDesign) << std::endl << designUtil::reportRows(myDesign) << std::endl;
 
+    double estimate = wireLength.estimate();
+    std::cout << "WireLength " << estimate << std::endl;
     Placer placer(myDesign);
     placer.place();
 
-    WireLength wireLength(myDesign);
-    double estimate = wireLength.estimate();
+    estimate = wireLength.estimate();
     std::cout << "WireLength " << estimate << std::endl;
     return 0;
 } 
