@@ -8,6 +8,7 @@
 #include "placer/Floorplanner.h"
 #include "placer/Placer.h"
 #include "util/util.h"
+#include "placer/WireLength.h"
 
 std::string pinDirection(ophidian::standard_cell::StandardCells &, ophidian::standard_cell::Pin &);
 bool isInput(ophidian::circuit::Netlist &, ophidian::circuit::Pin &);
@@ -48,6 +49,10 @@ int main(int argc, char** argv)
 
     Placer placer(myDesign);
     placer.place();
+
+    WireLength wireLength(myDesign);
+    double estimate = wireLength.estimate();
+    std::cout << "WireLength " << estimate << std::endl;
     return 0;
 } 
 
