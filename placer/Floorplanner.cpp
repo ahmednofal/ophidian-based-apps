@@ -33,6 +33,7 @@ void Floorplanner::create()
     mRowCount = ceil(sqrt(mFloorplanArea / (mRowRatio * mSiteHeight * mSiteWidth)));
     mSiteCount = ceil(mRowCount * mRowRatio);
 
+    printVals();
     for (int i = 0; i < mRowCount; ++i) {
         Point rowOrigin = Point(0, mSiteHeight * i);
         floorplan.add(Row(), rowOrigin, mSiteCount, mCoreSite);
@@ -44,7 +45,7 @@ void Floorplanner::printVals()
 {
     printf("chipArea: %.2f\nfpArea: %.2f\nsiteRatio %.2f\nrowRatio: %.2f\nrowCount: %d\n"
            "siteCount: %d\nsiteHeight %.2f\nsiteWidth: %.2f\n"
-           "whatever %.2f\n",
+           "whatever %.2f\ncellsArea %.2f\n",
             mChipArea, mFloorplanArea, mSiteRatio, mRowRatio, mRowCount, mSiteCount, mSiteHeight, mSiteWidth,
-            mFloorplanArea / (mRowRatio * mSiteHeight * mSiteWidth));
+            mFloorplanArea / (mRowRatio * mSiteHeight * mSiteWidth), mCellsArea);
  }
