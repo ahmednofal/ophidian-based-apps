@@ -5,8 +5,8 @@
 #include <ophidian/circuit/Netlist.h>
 #include <ophidian/geometry/Models.h>
 #include <ophidian/placement/Library.h>
-#include <string>
 #include <cstdlib>
+
 namespace cellUtil{
     using Design=ophidian::design::Design;
     using Cell=ophidian::circuit::Cell;
