@@ -17,7 +17,7 @@ namespace cellUtil{
     float cellWidth(const Cell &,ophidian::circuit::LibraryMapping &, ophidian::placement::Library &  );
     float cellHeight(const Cell &,ophidian::circuit::LibraryMapping & ,ophidian::placement::Library & );
 
-    ophidian::geometry::Box  cellDim(const Cell &,ophidian::circuit::LibraryMapping &, ophidian::placement::Library &);
+    ophidian::geometry::Box cellDim(const Cell &,ophidian::circuit::LibraryMapping &, ophidian::placement::Library &);
 };
 
 namespace floorplanUtil {
@@ -36,4 +36,13 @@ namespace floorplanUtil {
     float siteHeight(Design & design, Site & site);
     float cellsArea(Design & design);
 }
+
+
+namespace designUtil {
+    using Design = ophidian::design::Design;
+    using string = std::string;
+
+    string reportRows(Design & design);
+}
+
 #endif

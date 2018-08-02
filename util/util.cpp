@@ -1,4 +1,6 @@
 #include "util/util.h"
+#include <iostream>
+using string = std::string;
 
 float cellUtil::cellWidth(const Cell & cell,ophidian::circuit::LibraryMapping & libraryMapping,ophidian::placement::Library & library)
 {
@@ -73,4 +75,39 @@ floorplanUtil::Point floorplanUtil::siteDimensions(Design & design, Site & site)
 {
     Floorplan & floorplan = design.floorplan();
     return floorplan.siteUpperRightCorner(site);
+}
+
+
+string header(string title)
+{
+    string hashs = "############################";
+    return hashs + "\n " + title + "\n" + hashs + "\n";
+}
+
+
+string designUtil::reportRows(Design & design)
+{
+    auto floorplan = design.floorplan();
+    
+    bool isEven = true;
+    int rowNumber = 0;
+    string report = "";
+    auto site = floorplan.find("core");
+    int siteWidth = floorplanUtil::siteWidth(design, site);
+
+    report += header("ROWS");
+    for (auto row : floorplan.rowsRange()) {
+       auto sitesInRow = floorplan.numberOfSites(row); 
+       auto origin = floorplan.origin(row);
+       string orinetation = (isEven) ? "N" : "FS";
+
+       report += "ROW ROW_" + std::to_string(rowNumber) + " core " + std::to_string((int) origin.x()) 
+           + " " + std::to_string((int) origin.y()) + " " + orinetation + " DO " 
+           + std::to_string(sitesInRow) + " BY 1 STEP " + std::to_string(siteWidth) + " 0;\n";
+
+       rowNumber += 1;
+       isEven = !isEven;
+    }
+
+    return report;
 }
