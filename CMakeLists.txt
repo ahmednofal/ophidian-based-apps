@@ -68,15 +68,6 @@ add_executable(main
     main.cpp
 )
 
-add_executable(tester
-    test.cpp
-)
-
-target_link_libraries(tester
-    PUBLIC ophidian::ophidian_design
-    myPlacer
-)
-
 target_link_libraries(main
     PUBLIC ophidian::ophidian_design
     myPlacer

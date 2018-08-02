@@ -13,9 +13,10 @@ file(GLOB_RECURSE tests_SRC
 )
 
 # Add test target
-add_executable(ophidian_project_tests ${tests_SRC})
+add_executable(tests ${tests_SRC})
 
 # Link test target dependencies
-target_link_libraries(ophidian_project_tests PUBLIC 
-    Catch 
+target_link_libraries(tests PUBLIC 
+    PUBLIC ophidian::ophidian_design
+    myPlacer
 )
